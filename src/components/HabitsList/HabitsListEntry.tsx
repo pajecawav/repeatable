@@ -1,7 +1,7 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
-import { cn } from "@/utils";
+import { cn, formatValue } from "@/utils";
 import { observer } from "mobx-react-lite";
 import { Link } from "wouter";
 import { CircularProgress } from "../CircularProgress";
@@ -22,7 +22,7 @@ function DateProgressLabel({ date, habit }: { date: DateKey; habit: Habit }) {
 				)}
 				onClick={open}
 			>
-				<div>{value}</div>
+				<div>{formatValue(value)}</div>
 				<div>{habit.unit}</div>
 			</button>
 

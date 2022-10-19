@@ -5,3 +5,9 @@ export function cn(...values: (string | null | boolean | undefined)[]): string {
 export function getShortWeekDay(date: Date): string {
 	return new Intl.DateTimeFormat("en", { weekday: "short" }).format(date);
 }
+
+export function formatValue(value: number): string {
+	return new Intl.NumberFormat("en-US", { notation: "compact" }).format(
+		value
+	);
+}

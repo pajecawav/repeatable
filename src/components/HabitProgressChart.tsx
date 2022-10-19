@@ -1,4 +1,5 @@
 import { Habit } from "@/types";
+import { formatValue } from "@/utils";
 import dayjs from "dayjs";
 import { Fragment, useMemo } from "react";
 
@@ -46,10 +47,10 @@ function HabitProgressChartEntry({
 					className="bg-sky-600 text-white"
 					style={{ width: `${percentage}%` }}
 				>
-					{percentage > 5 ? entry.value : null}
+					{percentage > 5 ? formatValue(entry.value) : null}
 				</div>
 				<div className="w-0 flex-1 text-gray-600">
-					{percentage < 90 ? remaining : null}
+					{percentage < 95 ? formatValue(remaining) : null}
 				</div>
 			</div>
 		</Fragment>
@@ -107,7 +108,7 @@ export function HabitProgressChart({ habit }: HabitProgressChartProps) {
 	}, [habit]);
 
 	return (
-		<div className="p-4 rounded-md bg-white text-lg">
+		<div className="shadow-sm p-2 sm:p-4 rounded-md bg-white text-lg">
 			<h3 className="mb-2 text-sky-600">Goal</h3>
 
 			<div className="grid grid-cols-[max-content,1fr] items-center space-x-2 space-y-1">
