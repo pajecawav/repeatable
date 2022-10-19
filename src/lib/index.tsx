@@ -5,5 +5,9 @@ export function getDateKey(date: Date | number): DateKey {
 		date = new Date(date);
 	}
 
-	return date.toISOString().split("T")[0];
+	const year = date.getFullYear();
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+
+	return `${year}-${month}-${day}`;
 }
