@@ -44,7 +44,8 @@ export function UpdateHabitProgressModal({
 						min={0}
 						step="0.01"
 						size={4}
-						defaultValue={value}
+						defaultValue={value || undefined}
+						ref={elem => elem?.select()}
 					/>
 					<span>{unit}</span>
 				</div>
