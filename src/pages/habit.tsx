@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import { store } from "@/store";
 import { Link, Redirect, useLocation } from "wouter";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { HabitProgressChart } from "@/components/HabitProgressChart";
 
 interface HaibtPageProps {
 	params: {
@@ -46,6 +47,8 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 					{habit.goal} {habit.unit}
 				</span>
 			</div>
+
+			<HabitProgressChart habit={habit} />
 		</div>
 	);
 }
