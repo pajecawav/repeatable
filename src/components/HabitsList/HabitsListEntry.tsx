@@ -17,8 +17,10 @@ function DateProgressLabel({ date, habit }: { date: DateKey; habit: Habit }) {
 			<button
 				className={cn(
 					"flex-1 overflow-hidden",
-					value === 0 && "text-gray-400",
-					value !== 0 && value < habit.goal && "text-gray-600"
+					value === 0 && "text-gray-400 dark:text-neutral-500",
+					value !== 0 &&
+						value < habit.goal &&
+						"text-neutral-500 dark:text-neutral-300"
 				)}
 				onClick={open}
 			>
@@ -53,7 +55,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 	});
 
 	return (
-		<div className="shadow-sm flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600">
+		<div className="shadow-sm flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400">
 			<CircularProgress
 				className="text-xl flex-shrink-0"
 				progress={progress}

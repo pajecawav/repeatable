@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 :root {
-	/* color-scheme: light dark; */
-
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -14,8 +12,13 @@
 
 html {
 	scrollbar-gutter: stable;
+	color-scheme: light;
+}
+
+html.dark {
+	color-scheme: dark;
 }
 
 body {
-	@apply min-h-screen bg-neutral-100;
+	@apply min-h-screen bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-300;
 }

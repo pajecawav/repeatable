@@ -20,7 +20,12 @@ export function CircularProgress({
 			strokeWidth="1.5"
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<circle className="text-neutral-200" cx="5" cy="5" r="4" />
+			<circle
+				className="text-neutral-200 dark:text-neutral-600"
+				cx="5"
+				cy="5"
+				r="4"
+			/>
 			<circle
 				className="transition-all duration-500"
 				cx="5"

@@ -8,7 +8,7 @@ import { NewHabitPage } from "./pages/new";
 
 export const App = observer(() => {
 	return (
-		<div className="text-black max-w-xl w-full mx-auto px-1">
+		<div className="max-w-xl w-full mx-auto px-1 pb-2">
 			<HeaderProvider>
 				<Header />
 

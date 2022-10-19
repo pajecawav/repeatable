@@ -1,4 +1,4 @@
-import { store } from "@/store";
+import { store } from "@/stores/habitsStore";
 import { observer } from "mobx-react-lite";
 import { HabitListEntry } from "./HabitsListEntry";
 

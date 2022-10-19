@@ -1,5 +1,5 @@
 import { EditHabitForm, EditHabitFormData } from "@/components/EditHabitForm";
-import { store } from "@/store";
+import { store } from "@/stores/habitsStore";
 import { useLocation } from "wouter";
 
 export function NewHabitPage() {

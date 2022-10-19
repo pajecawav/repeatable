@@ -1,7 +1,7 @@
 import { Button } from "@/components/Button";
 import { FormControl } from "@/components/FormControl";
 import { Input } from "@/components/Input";
-import { HabitCreate } from "@/store";
+import { HabitCreate } from "@/stores/habitsStore";
 import { useForm } from "react-hook-form";
 
 interface EditHabitFormProps {

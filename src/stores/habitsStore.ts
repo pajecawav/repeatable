@@ -1,16 +1,16 @@
 import { autorun, makeAutoObservable } from "mobx";
-import { DateKey, Habit } from "./types";
+import { DateKey, Habit } from "../types";
 
-const LOCAL_STORAGE_KEY = "habits";
+const HABITS_KEY = "habits.data";
 
 let latestId = 0;
 
 // TODO: use IndexedDB instead of LocalStorage
 function saveHabits(habits: Habit[]) {
-	localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(habits));
+	localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
 }
 function loadHabits(): Habit[] | null {
-	const habits = localStorage.getItem(LOCAL_STORAGE_KEY);
+	const habits = localStorage.getItem(HABITS_KEY);
 	return habits ? JSON.parse(habits) : null;
 }
 
