@@ -1,8 +1,9 @@
 import { Button } from "@/components/Button";
-import { store } from "@/stores/habitsStore";
-import { Link, Redirect, useLocation } from "wouter";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { HabitBestStreaksChart } from "@/components/HabitBestStreaksChart";
 import { HabitProgressChart } from "@/components/HabitProgressChart";
+import { store } from "@/stores/habitsStore";
+import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { Link, Redirect, useLocation } from "wouter";
 
 interface HaibtPageProps {
 	params: {
@@ -47,6 +48,8 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 			</div>
 
 			<HabitProgressChart habit={habit} />
+
+			<HabitBestStreaksChart habit={habit} />
 		</div>
 	);
 }

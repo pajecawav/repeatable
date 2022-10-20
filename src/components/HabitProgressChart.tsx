@@ -2,6 +2,7 @@ import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import dayjs from "dayjs";
 import { Fragment, useMemo } from "react";
+import { Card } from "./Card";
 
 interface HabitProgressChartProps {
 	habit: Habit;
@@ -108,8 +109,8 @@ export function HabitProgressChart({ habit }: HabitProgressChartProps) {
 	}, [habit]);
 
 	return (
-		<div className="shadow-sm p-2 sm:p-4 rounded-md bg-white text-lg dark:bg-neutral-800">
-			<h3 className="mb-2 text-sky-600 dark:text-blue-400">Goal</h3>
+		<Card>
+			<Card.Title>Goal</Card.Title>
 
 			<div className="grid grid-cols-[max-content,1fr] items-center space-x-2 space-y-1">
 				<HabitProgressChartEntry section="day" entry={progress.day} />
@@ -120,6 +121,6 @@ export function HabitProgressChart({ habit }: HabitProgressChartProps) {
 				/>
 				<HabitProgressChartEntry section="year" entry={progress.year} />
 			</div>
-		</div>
+		</Card>
 	);
 }
