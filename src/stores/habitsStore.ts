@@ -71,6 +71,19 @@ class Store {
 
 		habit.entries[dateKey] = { value };
 	}
+
+	moveHabit(oldIndex: number, newIndex: number) {
+		if (oldIndex < 0 || oldIndex >= this.habits.length) {
+			throw new Error("oldIndex out of range");
+		}
+
+		if (newIndex < 0 || newIndex >= this.habits.length) {
+			throw new Error("newIndex out of range");
+		}
+
+		const [habit] = this.habits.splice(oldIndex, 1);
+		this.habits.splice(newIndex, 0, habit);
+	}
 }
 
 export const store = new Store();

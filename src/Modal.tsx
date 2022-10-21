@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
-import { cn } from "./utils";
 interface ModalProps {
 	title: string;
 	children: ReactNode;
@@ -12,7 +11,7 @@ export function Modal({ title, children, onClose }: ModalProps) {
 		<Transition appear show={true} as={Fragment}>
 			<Dialog
 				as="div"
-				className="relative z-10"
+				className="relative z-30"
 				onClose={() => onClose?.()}
 			>
 				<Transition.Child

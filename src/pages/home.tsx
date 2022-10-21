@@ -12,7 +12,7 @@ export function HomePage() {
 
 	return (
 		<div>
-			<div className="sticky top-12 flex bg-neutral-100 pb-2 px-2 sm:px-4 dark:bg-neutral-900">
+			<div className="z-20 sticky top-12 flex bg-neutral-100 pb-2 px-2 sm:px-4 dark:bg-neutral-900">
 				<Button
 					className="shadow-sm -ml-2 sm:-ml-4"
 					as={Link}

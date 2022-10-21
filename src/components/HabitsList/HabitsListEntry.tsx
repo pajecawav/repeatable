@@ -2,7 +2,9 @@ import { useDisclosure } from "@/hooks/useDisclosure";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
 import { cn, formatValue } from "@/utils";
+import { useSortable } from "@dnd-kit/sortable";
 import { observer } from "mobx-react-lite";
+import { CSSProperties } from "react";
 import { Link } from "wouter";
 import { CircularProgress } from "../CircularProgress";
 import { UpdateHabitProgressModal } from "../UpdateHabitProgressModal";
@@ -42,6 +44,21 @@ function DateProgressLabel({ date, habit }: { date: DateKey; habit: Habit }) {
 }
 
 export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
+	const {
+		attributes,
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+		isDragging,
+	} = useSortable({ id: habit.id });
+
+	const style: CSSProperties = {
+		transform: transform ? `translateY(${transform.y}px)` : undefined,
+		transition,
+		pointerEvents: isDragging ? "none" : undefined,
+	};
+
 	const now = new Date();
 
 	const todayKey = getDateKey(now);
@@ -55,7 +72,13 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 	});
 
 	return (
-		<div className="shadow-sm flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400">
+		<div
+			className="cursor-auto touch-none shadow-sm flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
+			ref={setNodeRef}
+			style={style}
+			{...attributes}
+			{...listeners}
+		>
 			<CircularProgress
 				className="text-xl flex-shrink-0"
 				progress={progress}

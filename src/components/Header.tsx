@@ -10,8 +10,6 @@ import {
 	useState,
 } from "react";
 import ReactDOM from "react-dom";
-import { themeStore } from "@/stores/themeStore";
-import { observer } from "mobx-react-lite";
 import { ThemeToggle } from "./ThemeToggle";
 
 type HeaderContextValue = [
@@ -71,7 +69,7 @@ export function Header() {
 
 	return (
 		<header
-			className="h-12 sticky top-0 py-2 flex items-center justify-between bg-neutral-100 dark:bg-neutral-900"
+			className="z-20 h-12 sticky top-0 py-2 flex items-center justify-between bg-neutral-100 dark:bg-neutral-900"
 			ref={setHeader}
 		>
 			<Link href="/" className="text-2xl">
