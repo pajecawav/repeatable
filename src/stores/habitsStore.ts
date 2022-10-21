@@ -3,8 +3,6 @@ import { DateKey, Habit } from "../types";
 
 const HABITS_KEY = "habits.data";
 
-let latestId = 0;
-
 // TODO: use IndexedDB instead of LocalStorage
 function saveHabits(habits: Habit[]) {
 	localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
@@ -15,6 +13,7 @@ function loadHabits(): Habit[] | null {
 }
 
 const savedHabits: Habit[] = loadHabits() ?? [];
+let latestId = Math.max(0, ...savedHabits.map(habit => habit.id));
 
 export type HabitCreate = Omit<Habit, "id" | "entries">;
 export type HabitUpdate = Partial<Omit<Habit, "id" | "entries">>;
