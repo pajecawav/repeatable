@@ -37,7 +37,7 @@ export const HabitsList = observer(() => {
 
 	if (store.habits.length === 0) {
 		return (
-			<div className="h-32 grid place-items-center text-xl text-neutral-500 border-b border-b-neutral-700">
+			<div className="h-32 grid place-items-center text-xl text-neutral-500 border-b border-neutral-300 dark:border-neutral-800">
 				No habits in the list.
 			</div>
 		);
