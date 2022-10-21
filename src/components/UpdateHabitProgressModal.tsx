@@ -33,7 +33,7 @@ export function UpdateHabitProgressModal({
 	return (
 		<Modal title="Update value" onClose={onClose}>
 			<form
-				className="w-48 flex flex-col items-center space-y-2"
+				className="w-48 flex flex-col items-center gap-2"
 				onSubmit={handleSubmit}
 			>
 				<div>

@@ -53,7 +53,7 @@ export const HabitsList = observer(() => {
 				items={store.habits.map(habit => habit.id)}
 				strategy={verticalListSortingStrategy}
 			>
-				<div className="text-sm sm:text-base space-y-2">
+				<div className="flex flex-col gap-2 text-sm sm:text-base">
 					{store.habits.map(habit => (
 						<HabitListEntry habit={habit} key={habit.id} />
 					))}

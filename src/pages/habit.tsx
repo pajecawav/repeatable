@@ -30,8 +30,8 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 	}
 
 	return (
-		<div className="space-y-2">
-			<div className="flex items-center space-x-2">
+		<div className="flex flex-col gap-2">
+			<div className="flex items-center gap-2">
 				<h2 className="flex-1 text-3xl">{habit.name}</h2>
 
 				<Button as={Link} href={`/${id}/edit`}>

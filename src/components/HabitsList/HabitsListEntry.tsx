@@ -73,7 +73,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 
 	return (
 		<div
-			className="cursor-auto touch-none shadow-sm flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
+			className="cursor-auto touch-none shadow-sm flex items-center gap-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
 			ref={setNodeRef}
 			style={style}
 			{...attributes}

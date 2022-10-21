@@ -19,7 +19,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 
 	return (
 		<form
-			className="flex flex-col space-y-2"
+			className="flex flex-col gap-2"
 			onSubmit={form.handleSubmit(onSubmit)}
 		>
 			<FormControl>
@@ -35,7 +35,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 				/>
 			</FormControl>
 
-			<div className="grid space-x-2 grid-cols-2">
+			<div className="grid gap-x-2 grid-cols-2">
 				<FormControl>
 					<label htmlFor="name">Goal</label>
 					<Input

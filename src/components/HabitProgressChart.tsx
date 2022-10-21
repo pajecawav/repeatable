@@ -112,7 +112,7 @@ export function HabitProgressChart({ habit }: HabitProgressChartProps) {
 		<Card>
 			<Card.Title>Goal</Card.Title>
 
-			<div className="grid grid-cols-[max-content,1fr] items-center space-x-2 space-y-1">
+			<div className="grid grid-cols-[max-content,1fr] items-center gap-x-2 gap-y-1">
 				<HabitProgressChartEntry section="day" entry={progress.day} />
 				<HabitProgressChartEntry section="week" entry={progress.week} />
 				<HabitProgressChartEntry
