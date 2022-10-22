@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
 import { cn } from "@/utils";
@@ -13,8 +14,6 @@ interface HabitHistoryCalendarProps {
 	habit: Habit;
 }
 
-const TOTAL_WEEKS = 15;
-
 const RECT_SIZE = 11;
 const CELL_SPACING = 1;
 const HEADER_SIZE = 8;
@@ -27,19 +26,22 @@ export const HabitHistoryCalendar = observer(
 			null
 		);
 
+		const isExtraSmallScreen = useMediaQuery("xs", true);
+		const totalWeeks = isExtraSmallScreen ? 12 : 18;
+
 		const data = useMemo(() => {
 			return computed(() => {
-				const now = dayjs();
-				const nowDateKey = getDateKey(now);
+				const endDate = dayjs();
+				const nowDateKey = getDateKey(endDate);
 
-				const startDate = now
+				const startDate = endDate
 					.startOf("week")
-					.subtract(TOTAL_WEEKS - 1, "weeks");
+					.subtract(totalWeeks - 1, "weeks");
 
 				const weeks: number[][] = [];
 
 				const date = startDate.toDate();
-				for (let week = 0; week < TOTAL_WEEKS; week++) {
+				for (let week = 0; week < totalWeeks; week++) {
 					const weekValues = [];
 					for (let day = 0; day < 7; day++) {
 						const dateKey = getDateKey(date);
@@ -56,7 +58,7 @@ export const HabitHistoryCalendar = observer(
 
 				return { startDate, weeks };
 			});
-		}, [habit.entries]).get();
+		}, [habit.entries, totalWeeks]).get();
 
 		function indexesToDate(weekIndex: number, dayIndex: number): Dayjs {
 			return data.startDate.add(weekIndex * 7 + dayIndex, "day");
@@ -74,7 +76,7 @@ export const HabitHistoryCalendar = observer(
 
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						viewBox={`0 0 ${TOTAL_WEEKS * CELL_SIZE + 12} ${
+						viewBox={`0 0 ${totalWeeks * CELL_SIZE + 12} ${
 							HEADER_SIZE + 7 * CELL_SIZE
 						}`}
 						fill="currentColor"
@@ -129,8 +131,11 @@ export const HabitHistoryCalendar = observer(
 							</g>
 						))}
 
-						<MonthLabels startDate={data.startDate} />
-						<WeekDayLabels />
+						<MonthLabels
+							startDate={data.startDate}
+							totalWeeks={totalWeeks}
+						/>
+						<WeekDayLabels totalWeeks={totalWeeks} />
 					</svg>
 				</Card>
 
@@ -150,13 +155,15 @@ export const HabitHistoryCalendar = observer(
 
 const MonthLabels = memo(function MonthLabels({
 	startDate,
+	totalWeeks,
 }: {
 	startDate: Dayjs;
+	totalWeeks: number;
 }) {
 	const labels = [];
 
 	let date = startDate;
-	for (let i = 0; i < TOTAL_WEEKS - 1; i++) {
+	for (let i = 0; i < totalWeeks - 1; i++) {
 		const nextDate = date.add(7, "days");
 
 		if (!nextDate.isSame(date, "month")) {
@@ -178,13 +185,17 @@ const MonthLabels = memo(function MonthLabels({
 	return <>{labels}</>;
 });
 
-const WeekDayLabels = memo(function WeekDayLabels() {
+const WeekDayLabels = memo(function WeekDayLabels({
+	totalWeeks,
+}: {
+	totalWeeks: number;
+}) {
 	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 	return (
 		<g
 			transform={`translate(${
-				CELL_SIZE * TOTAL_WEEKS + 1
+				CELL_SIZE * totalWeeks + 1
 			}, ${HEADER_SIZE})`}
 		>
 			{weekDays.map((name, index) => (
