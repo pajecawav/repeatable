@@ -27,7 +27,7 @@ export function CircularProgress({
 				r="4"
 			/>
 			<circle
-				className="transition-all duration-500"
+				className="transition-[stroke-dasharray] duration-500"
 				cx="5"
 				cy="5"
 				r="4"

@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 import dayjs, { Dayjs } from "dayjs";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { Card } from "../Card";
 import { UpdateHabitProgressModal } from "../UpdateHabitProgressModal";
 import styles from "./HabitHistoryCalendar.module.css";
@@ -71,6 +71,7 @@ export const HabitHistoryCalendar = observer(
 			<>
 				<Card>
 					<Card.Title>History</Card.Title>
+
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox={`0 0 ${TOTAL_WEEKS * CELL_SIZE + 12} ${
@@ -147,7 +148,11 @@ export const HabitHistoryCalendar = observer(
 	}
 );
 
-function MonthLabels({ startDate }: { startDate: Dayjs }) {
+const MonthLabels = memo(function MonthLabels({
+	startDate,
+}: {
+	startDate: Dayjs;
+}) {
 	const labels = [];
 
 	let date = startDate;
@@ -160,6 +165,7 @@ function MonthLabels({ startDate }: { startDate: Dayjs }) {
 					className="text-[5px] select-none text-gray-500 dark:text-neutral-500"
 					y={HEADER_SIZE - 3}
 					x={CELL_SIZE * i + 1}
+					key={date.month()}
 				>
 					{date.format("MMM")}
 				</text>
@@ -170,9 +176,9 @@ function MonthLabels({ startDate }: { startDate: Dayjs }) {
 	}
 
 	return <>{labels}</>;
-}
+});
 
-function WeekDayLabels() {
+const WeekDayLabels = memo(function WeekDayLabels() {
 	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 	return (
@@ -192,4 +198,4 @@ function WeekDayLabels() {
 			))}
 		</g>
 	);
-}
+});

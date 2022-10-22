@@ -1,6 +1,8 @@
 import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import dayjs from "dayjs";
+import { computed } from "mobx";
+import { observer } from "mobx-react-lite";
 import { Fragment, useMemo } from "react";
 import { Card } from "./Card";
 
@@ -45,7 +47,7 @@ function HabitProgressChartEntry({
 			</span>
 			<div className="flex items-center rounded-sm overflow-hidden text-sm text-center bg-neutral-200 dark:bg-neutral-700">
 				<div
-					className="bg-sky-600 text-white dark:bg-blue-500 dark:text-neutral-800"
+					className="transition-[width] duration-300 bg-sky-600 text-white dark:bg-blue-500 dark:text-neutral-800"
 					style={{ width: `${percentage}%` }}
 				>
 					{percentage > 5 ? formatValue(entry.value) : null}
@@ -58,69 +60,83 @@ function HabitProgressChartEntry({
 	);
 }
 
-export function HabitProgressChart({ habit }: HabitProgressChartProps) {
-	const progress = useMemo<Progress>(() => {
-		const goal = habit.goal;
-		const today = dayjs();
+export const HabitProgressChart = observer(
+	({ habit }: HabitProgressChartProps) => {
+		const progress: Progress = useMemo(() => {
+			return computed(() => {
+				const goal = habit.goal;
+				const today = dayjs();
 
-		const result: Progress = {
-			day: {
-				value: 0,
-				goal,
-			},
-			week: {
-				value: 0,
-				goal: 7 * goal,
-			},
-			month: {
-				value: 0,
-				goal: today.daysInMonth() * goal,
-			},
-			year: {
-				value: 0,
-				goal:
-					today.endOf("year").diff(today.startOf("year"), "days") *
-					goal,
-			},
-		};
+				const result: Progress = {
+					day: {
+						value: 0,
+						goal,
+					},
+					week: {
+						value: 0,
+						goal: 7 * goal,
+					},
+					month: {
+						value: 0,
+						goal: today.daysInMonth() * goal,
+					},
+					year: {
+						value: 0,
+						goal:
+							today
+								.endOf("year")
+								.diff(today.startOf("year"), "days") * goal,
+					},
+				};
 
-		for (const [dateKey, data] of Object.entries(habit.entries)) {
-			if (!data) {
-				continue;
-			}
+				for (const [dateKey, data] of Object.entries(habit.entries)) {
+					if (!data) {
+						continue;
+					}
 
-			const date = new Date(dateKey);
+					const date = new Date(dateKey);
 
-			if (today.isSame(date, "day")) {
-				result.day.value += data.value;
-			}
-			if (today.isSame(date, "week")) {
-				result.week.value += data.value;
-			}
-			if (today.isSame(date, "month")) {
-				result.month.value += data.value;
-			}
-			if (today.isSame(date, "year")) {
-				result.year.value += data.value;
-			}
-		}
+					if (today.isSame(date, "day")) {
+						result.day.value += data.value;
+					}
+					if (today.isSame(date, "week")) {
+						result.week.value += data.value;
+					}
+					if (today.isSame(date, "month")) {
+						result.month.value += data.value;
+					}
+					if (today.isSame(date, "year")) {
+						result.year.value += data.value;
+					}
+				}
 
-		return result;
-	}, [habit]);
+				return result;
+			});
+		}, [habit]).get();
 
-	return (
-		<Card>
-			<Card.Title>Goal</Card.Title>
+		return (
+			<Card>
+				<Card.Title>Goal</Card.Title>
 
-			<div className="grid grid-cols-[max-content,1fr] items-center gap-x-2 gap-y-1">
-				<HabitProgressChartEntry section="day" entry={progress.day} />
-				<HabitProgressChartEntry section="week" entry={progress.week} />
-				<HabitProgressChartEntry
-					section="month"
-					entry={progress.month}
-				/>
-				<HabitProgressChartEntry section="year" entry={progress.year} />
-			</div>
-		</Card>
-	);
-}
+				<div className="grid grid-cols-[max-content,1fr] items-center gap-x-2 gap-y-1">
+					<HabitProgressChartEntry
+						section="day"
+						entry={progress.day}
+					/>
+					<HabitProgressChartEntry
+						section="week"
+						entry={progress.week}
+					/>
+					<HabitProgressChartEntry
+						section="month"
+						entry={progress.month}
+					/>
+					<HabitProgressChartEntry
+						section="year"
+						entry={progress.year}
+					/>
+				</div>
+			</Card>
+		);
+	}
+);
