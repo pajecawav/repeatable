@@ -1,4 +1,6 @@
-export function cn(...values: (string | null | boolean | undefined)[]): string {
+export function cn(
+	...values: (string | boolean | number | null | undefined)[]
+): string {
 	return values.filter(Boolean).join(" ");
 }
 

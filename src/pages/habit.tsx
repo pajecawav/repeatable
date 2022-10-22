@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import { HabitBestStreaksChart } from "@/components/HabitBestStreaksChart";
+import { HabitHistoryCalendar } from "@/components/HabitHistoryCalendar";
 import { HabitProgressChart } from "@/components/HabitProgressChart";
 import { store } from "@/stores/habitsStore";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
@@ -48,6 +49,8 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 			</div>
 
 			<HabitProgressChart habit={habit} />
+
+			<HabitHistoryCalendar habit={habit} />
 
 			<HabitBestStreaksChart habit={habit} />
 		</div>

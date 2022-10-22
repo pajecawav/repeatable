@@ -1,0 +1,7 @@
+.text {
+	font-size: 5px;
+	cursor: pointer;
+	user-select: none;
+	dominant-baseline: middle;
+	text-anchor: middle;
+}
