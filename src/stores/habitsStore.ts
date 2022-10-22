@@ -83,8 +83,18 @@ class Store {
 		const [habit] = this.habits.splice(oldIndex, 1);
 		this.habits.splice(newIndex, 0, habit);
 	}
+
+	replaceHabits(habits: Habit[]) {
+		this.habits = habits;
+	}
 }
 
 export const store = new Store();
 
 autorun(() => saveHabits(store.habits));
+
+window.addEventListener("storage", event => {
+	if (event.key === HABITS_KEY && event.newValue) {
+		store.replaceHabits(JSON.parse(event.newValue) as Habit[]);
+	}
+});
