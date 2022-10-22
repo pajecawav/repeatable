@@ -1,4 +1,5 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
+import { SixVerticalDotsIcon } from "@/icons/SixVerticalDotsIcon";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
 import { cn, formatValue } from "@/utils";
@@ -51,7 +52,9 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 		transform,
 		transition,
 		isDragging,
-	} = useSortable({ id: habit.id });
+		isOver,
+		isSorting,
+	} = useSortable({ id: habit.id, attributes: { tabIndex: -1 } });
 
 	const style: CSSProperties = {
 		transform: transform ? `translateY(${transform.y}px)` : undefined,
@@ -73,12 +76,22 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 
 	return (
 		<div
-			className="cursor-auto touch-none shadow-sm flex items-center gap-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
+			className="group relative cursor-auto touch-none shadow-sm flex items-center gap-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
 			ref={setNodeRef}
 			style={style}
 			{...attributes}
 			{...listeners}
 		>
+			{(!isSorting || isDragging) && (
+				<SixVerticalDotsIcon
+					className={cn(
+						"absolute left-0 -translate-x-full w-6 h-6 opacity-0 hidden sm:block",
+						"text-gray-400 dark:text-neutral-500 cursor-grab outline-none transition-opacity duration-200 group-hover:duration-75",
+						!isOver && !isDragging && "group-hover:opacity-100"
+					)}
+				/>
+			)}
+
 			<CircularProgress
 				className="text-xl flex-shrink-0"
 				progress={progress}
