@@ -102,7 +102,7 @@ export const HabitHistoryCalendar = observer(
 												"cursor-pointer",
 												value
 													? "text-sky-600 dark:text-blue-500"
-													: "text-neutral-200 dark:text-neutral-700"
+													: "text-gray-200 dark:text-neutral-700"
 											)}
 											width={RECT_SIZE}
 											height={RECT_SIZE}

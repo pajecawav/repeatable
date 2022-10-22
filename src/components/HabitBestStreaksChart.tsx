@@ -32,7 +32,7 @@ function StreakEntry({ streak, best }: { streak: Streak; best: number }) {
 					percentageOfBest > 0.5 &&
 						"bg-sky-600 text-white dark:bg-blue-500 dark:text-neutral-800",
 					percentageOfBest <= 0.5 &&
-						"bg-neutral-200 text-gray-600 dark:bg-neutral-700 dark:text-neutral-400"
+						"bg-gray-200 text-gray-600 dark:bg-neutral-700 dark:text-neutral-400"
 				)}
 				style={{ flexGrow: percentageOfBest }}
 			>

@@ -21,7 +21,7 @@ export function CircularProgress({
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<circle
-				className="text-neutral-200 dark:text-neutral-600"
+				className="text-gray-200 dark:text-neutral-600"
 				cx="5"
 				cy="5"
 				r="4"

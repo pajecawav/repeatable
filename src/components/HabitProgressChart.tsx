@@ -45,7 +45,7 @@ function HabitProgressChartEntry({
 			<span className="text-right text-sm text-gray-500 dark:text-neutral-500">
 				{progressLabels[section]}
 			</span>
-			<div className="flex items-center rounded-sm overflow-hidden text-sm text-center bg-neutral-200 dark:bg-neutral-700">
+			<div className="flex items-center rounded-sm overflow-hidden text-sm text-center bg-gray-200 dark:bg-neutral-700">
 				<div
 					className="transition-[width] duration-300 bg-sky-600 text-white dark:bg-blue-500 dark:text-neutral-800"
 					style={{ width: `${percentage}%` }}
