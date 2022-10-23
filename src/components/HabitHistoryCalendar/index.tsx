@@ -1,13 +1,13 @@
+import { useHabitHistory } from "@/hooks/useHabitHistory";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { settingsStore } from "@/stores/settingsStore";
 import { DateKey, Habit } from "@/types";
 import { cn } from "@/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import dayjs, { Dayjs } from "dayjs";
-import { computed } from "mobx";
+import { Dayjs } from "dayjs";
 import { observer } from "mobx-react-lite";
-import { memo, useMemo, useState } from "react";
+import { memo, useState } from "react";
 import { Card } from "../Card";
 import { UpdateHabitProgressModal } from "../UpdateHabitProgressModal";
 import styles from "./HabitHistoryCalendar.module.css";
@@ -28,45 +28,13 @@ export const HabitHistoryCalendar = observer(
 			null
 		);
 
-		const [offset, setOffset] = useState(0);
-		const shiftLeft = () => setOffset(offset + 1);
-		const shiftRight = () => setOffset(Math.max(0, offset - 1));
-
 		const isExtraSmallScreen = useMediaQuery("xs", true);
 		const totalWeeks = isExtraSmallScreen ? 12 : 18;
 
-		const data = useMemo(() => {
-			return computed(() => {
-				const endDate = dayjs().subtract(offset, "weeks");
-				const nowDateKey = getDateKey(new Date());
-
-				const weeksPadding = settingsStore.startOfWeek === 0 ? 1 : 0;
-				const startDate = endDate
-					.startOf("week")
-					.subtract(totalWeeks - weeksPadding, "weeks")
-					.add(settingsStore.startOfWeek, "day");
-
-				const weeks: number[][] = [];
-
-				const date = startDate.toDate();
-				for (let week = 0; week < totalWeeks; week++) {
-					const weekValues = [];
-					for (let day = 0; day < 7; day++) {
-						const dateKey = getDateKey(date);
-						weekValues.push(habit.entries[dateKey]?.value ?? 0);
-
-						if (dateKey === nowDateKey) {
-							break;
-						}
-
-						date.setDate(date.getDate() + 1);
-					}
-					weeks.push(weekValues);
-				}
-
-				return { startDate, weeks };
-			});
-		}, [habit.entries, offset, totalWeeks]).get();
+		const { data, offset, shiftLeft, shiftRight } = useHabitHistory(
+			habit,
+			totalWeeks
+		);
 
 		function indexesToDate(weekIndex: number, dayIndex: number): Dayjs {
 			return data.startDate.add(weekIndex * 7 + dayIndex, "day");
