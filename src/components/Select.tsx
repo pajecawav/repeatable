@@ -14,7 +14,7 @@ export function Select({ className, ...props }: SelectProps) {
 				)}
 				{...props}
 			/>
-			<div className="absolute top-0 right-2 bottom-0 grid place-items-center">
+			<div className="absolute top-0 right-2 bottom-0 grid place-items-center pointer-events-none">
 				<ChevronDownIcon className="w-4" />
 			</div>
 		</div>

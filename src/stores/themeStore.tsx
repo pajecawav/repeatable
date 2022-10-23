@@ -2,24 +2,30 @@ import { autorun, makeAutoObservable } from "mobx";
 
 const THEME_KEY = "habits.theme";
 
-export type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | "system";
 
 function getTheme(): Theme {
 	const storedTheme = localStorage.getItem(THEME_KEY);
+
 	if (storedTheme) {
 		return storedTheme as Theme;
 	}
 
-	const userMedia = matchMedia("(prefers-color-scheme: dark)");
-	if (userMedia?.matches) {
-		return "dark";
-	}
-
-	return "light";
+	return "system";
 }
 
 function saveTheme(theme: Theme) {
 	localStorage.setItem(THEME_KEY, theme);
+}
+
+function rawSetTheme(theme: "light" | "dark") {
+	const root = document.documentElement;
+
+	if (theme === "dark") {
+		root.classList.add("dark");
+	} else {
+		root.classList.remove("dark");
+	}
 }
 
 class ThemeStore {
@@ -32,22 +38,26 @@ class ThemeStore {
 	setTheme(theme: Theme) {
 		this.theme = theme;
 	}
-
-	toggleTheme() {
-		this.theme = this.theme === "light" ? "dark" : "light";
-	}
 }
 
 export const themeStore = new ThemeStore();
 
+const prefersDarkMedia = matchMedia("(prefers-color-scheme: dark)");
+if (themeStore.theme === "system") {
+	rawSetTheme(prefersDarkMedia.matches ? "dark" : "light");
+}
+prefersDarkMedia.addEventListener("change", event => {
+	if (themeStore.theme !== "system") {
+		return;
+	}
+
+	rawSetTheme(event.matches ? "dark" : "light");
+});
+
 autorun(() => {
 	saveTheme(themeStore.theme);
 
-	const root = document.documentElement;
-
-	if (themeStore.theme === "dark") {
-		root.classList.add("dark");
-	} else {
-		root.classList.remove("dark");
+	if (themeStore.theme !== "system") {
+		rawSetTheme(themeStore.theme);
 	}
 });

@@ -51,7 +51,9 @@ export function UpdateHabitProgressModal({
 					<span>{unit}</span>
 				</div>
 
-				<Button className="ml-auto">Save</Button>
+				<Button className="ml-auto border border-neutral-200 dark:border-none">
+					Save
+				</Button>
 			</form>
 		</Modal>
 	);
