@@ -1,8 +1,11 @@
+import { Button } from "@/components/Button";
 import { Select } from "@/components/Select";
+import { DataBackup, exportData, importData } from "@/lib/backup";
+import { store } from "@/stores/habitsStore";
 import { settingsStore, WeekDay } from "@/stores/settingsStore";
 import { Theme, themeStore } from "@/stores/themeStore";
 import { observer } from "mobx-react-lite";
-import { ReactNode } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 function Section({ children }: { children: ReactNode }) {
 	return <div className="flex gap-1 items-center">{children}</div>;
@@ -21,6 +24,23 @@ function Description({ children }: { children: ReactNode }) {
 }
 
 export const SettingsPage = observer(() => {
+	function handleExport() {
+		const data: DataBackup = { habits: store.habits };
+		exportData(data);
+	}
+
+	async function handleImport(e: ChangeEvent<HTMLInputElement>) {
+		const file = e.target.files?.[0];
+
+		if (!file) {
+			return;
+		}
+
+		const data = await importData(file);
+		// TODO: show toast?
+		store.replaceHabits(data.habits);
+	}
+
 	return (
 		<div className="mt-1 flex flex-col gap-4">
 			<Section>
@@ -59,6 +79,36 @@ export const SettingsPage = observer(() => {
 					<option value="5">Friday</option>
 					<option value="6">Saturday</option>
 				</Select>
+			</Section>
+
+			<hr className="border-neutral-200 dark:border-neutral-800" />
+
+			<Section>
+				<InfoContainer>
+					<Title>Export habits</Title>
+					<Description>
+						Generate a file with your habits. You can import this
+						file later.
+					</Description>
+				</InfoContainer>
+				<Button onClick={handleExport}>Export</Button>
+			</Section>
+
+			<Section>
+				<InfoContainer>
+					<Title>Import habits</Title>
+					<Description>Load previously exported habits.</Description>
+				</InfoContainer>
+
+				<Button as="label" className="cursor-pointer">
+					Import
+					<input
+						className="hidden"
+						type="file"
+						accept="application/json"
+						onChange={handleImport}
+					/>
+				</Button>
 			</Section>
 		</div>
 	);
