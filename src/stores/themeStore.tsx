@@ -43,9 +43,6 @@ class ThemeStore {
 export const themeStore = new ThemeStore();
 
 const prefersDarkMedia = matchMedia("(prefers-color-scheme: dark)");
-if (themeStore.theme === "system") {
-	rawSetTheme(prefersDarkMedia.matches ? "dark" : "light");
-}
 prefersDarkMedia.addEventListener("change", event => {
 	if (themeStore.theme !== "system") {
 		return;
@@ -57,7 +54,15 @@ prefersDarkMedia.addEventListener("change", event => {
 autorun(() => {
 	saveTheme(themeStore.theme);
 
-	if (themeStore.theme !== "system") {
+	if (themeStore.theme === "system") {
+		rawSetTheme(prefersDarkMedia.matches ? "dark" : "light");
+	} else {
 		rawSetTheme(themeStore.theme);
+	}
+});
+
+window.addEventListener("storage", event => {
+	if (event.key === THEME_KEY && event.newValue) {
+		themeStore.setTheme(event.newValue as Theme);
 	}
 });
