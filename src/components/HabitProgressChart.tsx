@@ -1,3 +1,4 @@
+import { settingsStore } from "@/stores/settingsStore";
 import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import dayjs from "dayjs";
@@ -89,18 +90,20 @@ export const HabitProgressChart = observer(
 					},
 				};
 
+				// padding to respect custom start of the week
+				const daysPadding = (7 - settingsStore.startOfWeek) % 7;
+
 				for (const [dateKey, data] of Object.entries(habit.entries)) {
 					if (!data) {
 						continue;
 					}
 
-					const date = new Date(dateKey);
+					const date = dayjs(new Date(dateKey));
 
 					if (today.isSame(date, "day")) {
 						result.day.value += data.value;
 					}
-					// TODO: doesn't respect `settings.startOfWeek`
-					if (today.isSame(date, "week")) {
+					if (today.isSame(date.add(daysPadding, "days"), "week")) {
 						result.week.value += data.value;
 					}
 					if (today.isSame(date, "month")) {
