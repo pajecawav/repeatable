@@ -57,6 +57,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 						className="w-full"
 						id="unit"
 						placeholder="pages"
+						autoCapitalize="off"
 						{...form.register("unit", {
 							required: true,
 							minLength: 1,
