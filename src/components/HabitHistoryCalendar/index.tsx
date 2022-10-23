@@ -174,7 +174,7 @@ const MonthLabels = memo(function MonthLabels({
 					x={CELL_SIZE * i + 1}
 					key={date.month()}
 				>
-					{date.format("MMM")}
+					{date.format(labels.length === 0 ? "MMM YYYY" : "MMM")}
 				</text>
 			);
 		}
