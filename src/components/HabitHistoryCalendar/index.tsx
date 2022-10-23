@@ -2,6 +2,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
 import { cn } from "@/utils";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import dayjs, { Dayjs } from "dayjs";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
@@ -26,13 +27,17 @@ export const HabitHistoryCalendar = observer(
 			null
 		);
 
+		const [offset, setOffset] = useState(0);
+		const shiftLeft = () => setOffset(offset + 1);
+		const shiftRight = () => setOffset(Math.max(0, offset - 1));
+
 		const isExtraSmallScreen = useMediaQuery("xs", true);
 		const totalWeeks = isExtraSmallScreen ? 12 : 18;
 
 		const data = useMemo(() => {
 			return computed(() => {
-				const endDate = dayjs();
-				const nowDateKey = getDateKey(endDate);
+				const endDate = dayjs().subtract(offset, "weeks");
+				const nowDateKey = getDateKey(new Date());
 
 				const startDate = endDate
 					.startOf("week")
@@ -58,7 +63,7 @@ export const HabitHistoryCalendar = observer(
 
 				return { startDate, weeks };
 			});
-		}, [habit.entries, totalWeeks]).get();
+		}, [habit.entries, offset, totalWeeks]).get();
 
 		function indexesToDate(weekIndex: number, dayIndex: number): Dayjs {
 			return data.startDate.add(weekIndex * 7 + dayIndex, "day");
@@ -72,7 +77,18 @@ export const HabitHistoryCalendar = observer(
 		return (
 			<>
 				<Card>
-					<Card.Title>History</Card.Title>
+					<div className="flex items-center justify-between">
+						<Card.Title>History</Card.Title>
+
+						<div className="flex gap-1.5 sm:gap-0 text-gray-500 dark:text-neutral-500">
+							<button onClick={shiftLeft}>
+								<ChevronLeftIcon className="w-6 sm:w-5" />
+							</button>
+							<button onClick={shiftRight}>
+								<ChevronRightIcon className="w-6 sm:w-5" />
+							</button>
+						</div>
+					</div>
 
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
