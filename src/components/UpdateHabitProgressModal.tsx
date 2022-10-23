@@ -45,8 +45,7 @@ export function UpdateHabitProgressModal({
 						step="0.01"
 						size={4}
 						defaultValue={value || undefined}
-						// TODO: this is triggered after clicking inside the modal
-						ref={elem => elem?.select()}
+						onFocus={e => e.target.select()}
 					/>
 					<span>{unit}</span>
 				</div>

@@ -1,4 +1,3 @@
-import { settingsStore } from "@/stores/settingsStore";
 import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import dayjs from "dayjs";
