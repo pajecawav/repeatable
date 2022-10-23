@@ -75,11 +75,6 @@ export const HabitHistoryCalendar = observer(
 			return data.startDate.add(weekIndex * 7 + dayIndex, "day");
 		}
 
-		function selectDate(weekIndex: number, dayIndex: number) {
-			const dateKey = getDateKey(indexesToDate(weekIndex, dayIndex));
-			setSelectedDateKey(dateKey);
-		}
-
 		return (
 			<>
 				<Card>
@@ -106,6 +101,12 @@ export const HabitHistoryCalendar = observer(
 							HEADER_SIZE + 7 * CELL_SIZE
 						}`}
 						fill="currentColor"
+						onClick={e => {
+							const node = e.target as HTMLElement;
+							if (node.dataset.datekey) {
+								setSelectedDateKey(node.dataset.datekey);
+							}
+						}}
 					>
 						{data.weeks.map((week, weekIndex) => (
 							<g
@@ -119,10 +120,6 @@ export const HabitHistoryCalendar = observer(
 										transform={`translate(0, ${
 											dayIndex * CELL_SIZE
 										})`}
-										// TODO: replace with a single event listener on the parent
-										onClick={() =>
-											selectDate(weekIndex, dayIndex)
-										}
 										key={dayIndex}
 									>
 										<rect
@@ -136,10 +133,17 @@ export const HabitHistoryCalendar = observer(
 											height={RECT_SIZE}
 											rx="2"
 											ry="2"
+											data-datekey={getDateKey(
+												indexesToDate(
+													weekIndex,
+													dayIndex
+												)
+											)}
 										/>
 										<text
 											className={cn(
 												styles.text,
+												"pointer-events-none",
 												value
 													? "text-white dark:text-neutral-800"
 													: "text-gray-600 dark:text-neutral-400"
