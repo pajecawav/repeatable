@@ -40,14 +40,11 @@ export const HabitHistoryCalendar = observer(
 				const endDate = dayjs().subtract(offset, "weeks");
 				const nowDateKey = getDateKey(new Date());
 
-				let startDate = endDate
+				const weeksPadding = settingsStore.startOfWeek === 0 ? 1 : 0;
+				const startDate = endDate
 					.startOf("week")
-					.subtract(totalWeeks, "weeks")
+					.subtract(totalWeeks - weeksPadding, "weeks")
 					.add(settingsStore.startOfWeek, "day");
-
-				if (endDate.diff(startDate, "weeks") >= totalWeeks) {
-					startDate = startDate.add(1, "weeks");
-				}
 
 				const weeks: number[][] = [];
 
