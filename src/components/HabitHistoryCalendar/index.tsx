@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
+import { settingsStore } from "@/stores/settingsStore";
 import { DateKey, Habit } from "@/types";
 import { cn } from "@/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -39,9 +40,14 @@ export const HabitHistoryCalendar = observer(
 				const endDate = dayjs().subtract(offset, "weeks");
 				const nowDateKey = getDateKey(new Date());
 
-				const startDate = endDate
+				let startDate = endDate
 					.startOf("week")
-					.subtract(totalWeeks - 1, "weeks");
+					.subtract(totalWeeks, "weeks")
+					.add(settingsStore.startOfWeek, "day");
+
+				if (endDate.diff(startDate, "weeks") >= totalWeeks) {
+					startDate = startDate.add(1, "weeks");
+				}
 
 				const weeks: number[][] = [];
 
@@ -84,7 +90,11 @@ export const HabitHistoryCalendar = observer(
 							<button onClick={shiftLeft}>
 								<ChevronLeftIcon className="w-6 sm:w-5" />
 							</button>
-							<button onClick={shiftRight}>
+							<button
+								className="disabled:text-neutral-300 dark:disabled:text-neutral-700"
+								onClick={shiftRight}
+								disabled={offset === 0}
+							>
 								<ChevronRightIcon className="w-6 sm:w-5" />
 							</button>
 						</div>
@@ -201,12 +211,18 @@ const MonthLabels = memo(function MonthLabels({
 	return <>{labels}</>;
 });
 
-const WeekDayLabels = memo(function WeekDayLabels({
+const WeekDayLabels = observer(function ({
 	totalWeeks,
 }: {
 	totalWeeks: number;
 }) {
-	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+	const startIndex = settingsStore.startOfWeek;
+	weekDays = [
+		...weekDays.slice(startIndex),
+		...weekDays.slice(0, startIndex),
+	];
 
 	return (
 		<g

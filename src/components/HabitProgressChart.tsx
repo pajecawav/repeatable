@@ -1,3 +1,4 @@
+import { settingsStore } from "@/stores/settingsStore";
 import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import dayjs from "dayjs";
@@ -99,6 +100,7 @@ export const HabitProgressChart = observer(
 					if (today.isSame(date, "day")) {
 						result.day.value += data.value;
 					}
+					// TODO: doesn't respect `settings.startOfWeek`
 					if (today.isSame(date, "week")) {
 						result.week.value += data.value;
 					}

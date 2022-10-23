@@ -1,4 +1,5 @@
 import { Select } from "@/components/Select";
+import { settingsStore, WeekDay } from "@/stores/settingsStore";
 import { Theme, themeStore } from "@/stores/themeStore";
 import { observer } from "mobx-react-lite";
 import { ReactNode } from "react";
@@ -21,7 +22,7 @@ function Description({ children }: { children: ReactNode }) {
 
 export const SettingsPage = observer(() => {
 	return (
-		<div className="mt-1">
+		<div className="mt-1 flex flex-col gap-4">
 			<Section>
 				<InfoContainer>
 					<Title>Interface theme</Title>
@@ -34,6 +35,29 @@ export const SettingsPage = observer(() => {
 					<option value="system">System</option>
 					<option value="light">Light</option>
 					<option value="dark">Dark</option>
+				</Select>
+			</Section>
+
+			<Section>
+				<InfoContainer>
+					<Title>First day of the week</Title>
+					<Description>
+						Set the first day of the week for the stats.
+					</Description>
+				</InfoContainer>
+				<Select
+					onChange={e =>
+						settingsStore.setStartOfWeek(+e.target.value as WeekDay)
+					}
+					value={settingsStore.startOfWeek}
+				>
+					<option value="0">Sunday</option>
+					<option value="1">Monday</option>
+					<option value="2">Tuesday</option>
+					<option value="3">Wednesday</option>
+					<option value="4">Thursday</option>
+					<option value="5">Friday</option>
+					<option value="6">Saturday</option>
 				</Select>
 			</Section>
 		</div>
