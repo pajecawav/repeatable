@@ -12,5 +12,8 @@ export function getDateKey(date: Date | number | Dayjs): DateKey {
 	const month = date.getMonth() + 1;
 	const day = date.getDate();
 
-	return `${year}-${month}-${day}`;
+	const monthPadded = month.toString().padStart(2, "0");
+	const dayPadded = day.toString().padStart(2, "0");
+
+	return `${year}-${monthPadded}-${dayPadded}`;
 }
