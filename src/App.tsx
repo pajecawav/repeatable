@@ -9,7 +9,7 @@ import { SettingsPage } from "./pages/settings";
 
 export const App = observer(() => {
 	return (
-		<div className="max-w-xl w-full mx-auto px-1 pb-2">
+		<div className="max-w-xl w-full mx-auto px-2 pb-2">
 			<Header />
 
 			<Switch>

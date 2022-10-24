@@ -9,7 +9,7 @@ export function Toggle({ className, checked, srText, ...props }: ToggleProps) {
 	return (
 		<Switch
 			className={cn(
-				"shadow-sm relative inline-flex h-6 w-11 items-center rounded-full border dark:border-transparent",
+				"shadow-sm relative inline-flex h-6 w-11 items-center rounded-full dark:border-transparent",
 				checked
 					? "bg-blue-200 dark:bg-blue-500"
 					: "bg-white dark:bg-neutral-800",
