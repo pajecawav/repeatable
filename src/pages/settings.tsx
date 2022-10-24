@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import { Select } from "@/components/Select";
+import { Toggle } from "@/components/Toggle";
 import { DataBackup, exportData, importData } from "@/lib/backup";
 import { store } from "@/stores/habitsStore";
 import { settingsStore, WeekDay } from "@/stores/settingsStore";
@@ -43,6 +44,21 @@ export const SettingsPage = observer(() => {
 
 	return (
 		<div className="mt-1 flex flex-col gap-4">
+			<Section>
+				<InfoContainer>
+					<Title>Hide completed</Title>
+					<Description>
+						Completed habits will be hidden for the rest of the day.
+					</Description>
+				</InfoContainer>
+				<Toggle
+					checked={settingsStore.hideCompleted}
+					onChange={value => settingsStore.setHideCompleted(value)}
+				/>
+			</Section>
+
+			<hr className="border-neutral-200 dark:border-neutral-800" />
+
 			<Section>
 				<InfoContainer>
 					<Title>Interface theme</Title>

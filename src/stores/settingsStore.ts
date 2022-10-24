@@ -6,6 +6,7 @@ export type WeekDay = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 interface Settings {
 	startOfWeek: WeekDay;
+	hideCompleted: boolean;
 }
 
 function saveSettings(settings: Settings) {
@@ -20,19 +21,28 @@ const savedSettings = loadSettings();
 
 class SettingsStore implements Settings {
 	startOfWeek = savedSettings?.startOfWeek ?? 0;
+	hideCompleted = savedSettings?.hideCompleted ?? false;
 
 	constructor() {
 		makeAutoObservable(this);
 	}
 
-	updateSettings({ startOfWeek }: Partial<Settings>) {
+	updateSettings({ startOfWeek, hideCompleted }: Partial<Settings>) {
 		if (startOfWeek !== undefined) {
 			this.startOfWeek = startOfWeek;
+		}
+
+		if (hideCompleted !== undefined) {
+			this.hideCompleted = hideCompleted;
 		}
 	}
 
 	setStartOfWeek(value: WeekDay) {
 		this.startOfWeek = value;
+	}
+
+	setHideCompleted(value: boolean) {
+		this.hideCompleted = value;
 	}
 }
 

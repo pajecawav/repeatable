@@ -1,3 +1,4 @@
+import { getDateKey } from "@/lib";
 import { autorun, makeAutoObservable } from "mobx";
 import { DateKey, Habit } from "../types";
 
@@ -23,6 +24,15 @@ class Store {
 
 	constructor() {
 		makeAutoObservable(this);
+	}
+
+	get uncompletedHabits() {
+		const nowKey = getDateKey(new Date());
+		const habits = this.habits.filter(habit => {
+			const value = habit.entries[nowKey]?.value ?? 0;
+			return value < habit.goal;
+		});
+		return habits;
 	}
 
 	addHabit(data: HabitCreate): Habit {
