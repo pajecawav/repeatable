@@ -14,10 +14,12 @@ export function useHabitHistory(habit: Habit, totalWeeks: number) {
 
 	const data = useMemo(() => {
 		return computed(() => {
-			const endDate = dayjs().add(offset, "weeks");
+			const now = dayjs();
+
+			const endDate = now.add(offset, "weeks");
 			const nowDateKey = getDateKey(new Date());
 
-			const weeksPadding = settingsStore.startOfWeek === 0 ? 1 : 0;
+			const weeksPadding = settingsStore.startOfWeek <= now.day() ? 1 : 0;
 			const startDate = endDate
 				.startOf("week")
 				.subtract(totalWeeks - weeksPadding, "weeks")

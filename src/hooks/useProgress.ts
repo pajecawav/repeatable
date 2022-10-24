@@ -47,7 +47,8 @@ export function useProgress(habit: Habit) {
 			};
 
 			// padding to respect custom start of the week
-			const daysPadding = (7 - settingsStore.startOfWeek) % 7;
+			const daysPadding = settingsStore.startOfWeek;
+			const todayAdjustedForWeek = today.subtract(daysPadding, "days");
 
 			for (const [dateKey, data] of Object.entries(habit.entries)) {
 				if (!data) {
@@ -55,11 +56,12 @@ export function useProgress(habit: Habit) {
 				}
 
 				const date = dayjs(new Date(dateKey));
+				const dateAdjustedForWeek = date.subtract(daysPadding, "days");
 
 				if (today.isSame(date, "day")) {
 					result.day.value += data.value;
 				}
-				if (today.isSame(date.add(daysPadding, "days"), "week")) {
+				if (todayAdjustedForWeek.isSame(dateAdjustedForWeek, "week")) {
 					result.week.value += data.value;
 				}
 				if (today.isSame(date, "month")) {
