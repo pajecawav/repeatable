@@ -1,3 +1,4 @@
+import { PROJECT_NAME } from "@/constants";
 import { Habit } from "@/types";
 import dayjs from "dayjs";
 
@@ -7,7 +8,10 @@ export interface DataBackup {
 
 export function exportData(data: DataBackup) {
 	const date = dayjs().format("YYYY-MM-DD_HH-mm-ss");
-	saveToFile(JSON.stringify(data, undefined, 4), `habits-${date}.json`);
+	saveToFile(
+		JSON.stringify(data, undefined, 4),
+		`${PROJECT_NAME}-${date}.json`
+	);
 }
 
 export async function importData(file: File): Promise<DataBackup> {

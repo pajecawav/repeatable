@@ -1,8 +1,9 @@
+import { PROJECT_NAME } from "@/constants";
 import { getDateKey } from "@/lib";
 import { autorun, makeAutoObservable } from "mobx";
 import { DateKey, Habit } from "../types";
 
-const HABITS_KEY = "habits.data";
+const HABITS_KEY = `${PROJECT_NAME}.habits`;
 
 // TODO: use IndexedDB instead of LocalStorage
 function saveHabits(habits: Habit[]) {

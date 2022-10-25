@@ -1,6 +1,7 @@
+import { PROJECT_NAME } from "@/constants";
 import { autorun, makeAutoObservable } from "mobx";
 
-const SETTINGS_KEY = "habits.settings";
+const SETTINGS_KEY = `${PROJECT_NAME}.settings`;
 
 export type WeekDay = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
