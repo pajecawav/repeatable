@@ -1,4 +1,5 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
+import { useRecentDates } from "@/hooks/useRecentDates";
 import { SixVerticalDotsIcon } from "@/icons/SixVerticalDotsIcon";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
@@ -68,11 +69,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 	const entryToday = habit.entries[todayKey];
 	const progress = (entryToday?.value ?? 0) / habit.goal;
 
-	const dateKeys: DateKey[] = Array.from({ length: 4 }, (_, i) => {
-		const date = new Date();
-		date.setDate(date.getDate() - i);
-		return getDateKey(date);
-	});
+	const dateKeys: DateKey[] = useRecentDates().map(getDateKey);
 
 	return (
 		<div
@@ -105,7 +102,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 				{habit.name}
 			</Link>
 
-			<div className="flex-shrink-0 w-1/2 sm:w-2/5 flex text-center leading-tight font-medium">
+			<div className="flex-shrink-0 w-1/2 sm:w-2/5 flex text-center leading-tight">
 				{dateKeys.map(dateKey => (
 					<DateProgressLabel
 						habit={habit}

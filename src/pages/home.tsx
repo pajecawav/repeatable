@@ -1,14 +1,11 @@
 import { Button } from "@/components/Button";
 import { HabitsList } from "@/components/HabitsList";
+import { useRecentDates } from "@/hooks/useRecentDates";
 import { getShortWeekDay } from "@/utils";
 import { Link } from "wouter";
 
 export function HomePage() {
-	const recentDates: Date[] = Array.from({ length: 4 }, (_, i) => {
-		const date = new Date();
-		date.setDate(date.getDate() - i);
-		return date;
-	});
+	const recentDates = useRecentDates();
 
 	return (
 		<div>
