@@ -160,16 +160,17 @@ const MonthLabels = memo(function MonthLabels({
 	let date = startDate;
 	for (let i = 0; i < totalWeeks - 1; i++) {
 		const nextDate = date.add(7, "days");
+		const weekEnd = date.add(6, "days");
 
-		if (!nextDate.isSame(date, "month")) {
+		if (weekEnd.date() <= 7) {
 			labels.push(
 				<text
 					className="text-[5px] select-none text-gray-500 dark:text-neutral-500"
 					y={HEADER_SIZE - 3}
 					x={CELL_SIZE * i + 1}
-					key={date.month()}
+					key={weekEnd.month()}
 				>
-					{date.format(labels.length === 0 ? "MMM YYYY" : "MMM")}
+					{weekEnd.format(labels.length === 0 ? "MMM YYYY" : "MMM")}
 				</text>
 			);
 		}
