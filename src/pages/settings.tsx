@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import { Select } from "@/components/Select";
 import { Toggle } from "@/components/Toggle";
+import { SCHEMA_VERSION } from "@/constants";
 import { DataBackup, exportData, importData } from "@/lib/backup";
 import { store } from "@/stores/habitsStore";
 import { settingsStore, WeekDay } from "@/stores/settingsStore";
@@ -26,7 +27,10 @@ function Description({ children }: { children: ReactNode }) {
 
 export const SettingsPage = observer(() => {
 	function handleExport() {
-		const data: DataBackup = { habits: store.habits };
+		const data: DataBackup = {
+			version: SCHEMA_VERSION,
+			habits: store.habits,
+		};
 		exportData(data);
 	}
 

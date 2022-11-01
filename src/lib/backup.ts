@@ -3,6 +3,7 @@ import { Habit } from "@/types";
 import dayjs from "dayjs";
 
 export interface DataBackup {
+	version: number;
 	habits: Habit[];
 }
 
