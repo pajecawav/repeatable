@@ -1,0 +1,51 @@
+{
+	"translation": {
+		"label.new": "New",
+		"label.edit": "Edit",
+		"label.delete": "Delete",
+		"label.save": "Save",
+
+		"label.name": "Name",
+		"label.name-placeholder": "Read book",
+		"label.goal": "Goal",
+		"label.units": "Units",
+		"label.units-placeholder": "pages",
+		"label.history": "History",
+		"label.best-streaks": "Best streaks",
+
+		"label.today": "Today",
+		"label.week": "Week",
+		"label.month": "Month",
+		"label.year": "Year",
+
+		"label.theme.light": "Light",
+		"label.theme.dark": "Dark",
+		"label.theme.system": "System",
+
+		"label.weekday.sunday": "Sunday",
+		"label.weekday.monday": "Monday",
+		"label.weekday.tuesday": "Tuesday",
+		"label.weekday.wednesday": "Wednesday",
+		"label.weekday.thursday": "Thursday",
+		"label.weekday.friday": "Friday",
+		"label.weekday.saturday": "Saturday",
+
+		"label.export": "Export",
+		"label.import": "Import",
+
+		"label.settings.hide-completed.title": "Hide completed",
+		"label.settings.hide-completed.description": "Completed habits will be hidden for the rest of the day.",
+		"label.settings.language.title": "Language",
+		"label.settings.language.description": "Select interface language.",
+		"label.settings.theme.title": "Interface theme",
+		"label.settings.theme.description": "Select interface color scheme.",
+		"label.settings.first-day.title": "First day of the week",
+		"label.settings.first-day.description": "Set the first day of the week for the stats.",
+		"label.settings.export.title": "Export data",
+		"label.settings.export.description": "Generate a file with your habits. You can import this file later.",
+		"label.settings.import.title": "Import data",
+		"label.settings.import.description": "Load previously exported habits.",
+
+		"message.confirm-delete": "Are you sure you want to delete this habit?"
+	}
+}

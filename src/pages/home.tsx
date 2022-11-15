@@ -2,9 +2,12 @@ import { Button } from "@/components/Button";
 import { HabitsList } from "@/components/HabitsList";
 import { useRecentDates } from "@/hooks/useRecentDates";
 import { getShortWeekDay } from "@/utils";
+import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
 
 export function HomePage() {
+	const { t } = useTranslation();
+
 	const recentDates = useRecentDates();
 
 	return (
@@ -15,7 +18,7 @@ export function HomePage() {
 					as={Link}
 					href="/new"
 				>
-					New
+					{t("label.new")}
 				</Button>
 
 				<div className="ml-auto  w-1/2 sm:w-2/5 flex text-gray-500 text-center text-sm leading-tight font-medium dark:text-neutral-400">

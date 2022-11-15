@@ -1,3 +1,5 @@
+import i18n from "./i18n";
+
 export function cn(
 	...values: (string | boolean | number | null | undefined)[]
 ): string {
@@ -5,17 +7,29 @@ export function cn(
 }
 
 export function getShortWeekDay(date: Date): string {
-	return new Intl.DateTimeFormat("en", { weekday: "short" }).format(date);
+	return new Intl.DateTimeFormat(i18n.language, { weekday: "short" }).format(
+		date
+	);
 }
 
 export function formatValue(value: number): string {
-	return new Intl.NumberFormat("en-US", { notation: "compact" }).format(
+	return new Intl.NumberFormat(i18n.language, { notation: "compact" }).format(
 		value
 	);
 }
 
 export function formatDate(date: Date): string {
-	return new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
-		date
-	);
+	return new Intl.DateTimeFormat(i18n.language, {
+		dateStyle: "medium",
+	}).format(date);
+}
+
+export function formatMonthLabel(date: Date, withYear: boolean): string {
+	const options: Intl.DateTimeFormatOptions = { month: "short" };
+
+	if (withYear) {
+		options.year = "numeric";
+	}
+
+	return new Intl.DateTimeFormat(i18n.language, options).format(date);
 }

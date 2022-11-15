@@ -7,24 +7,18 @@ import { Habit } from "@/types";
 import { formatValue } from "@/utils";
 import { observer } from "mobx-react-lite";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "./Card";
 
 interface HabitProgressChartProps {
 	habit: Habit;
 }
 
-const progressLabels: Record<ProgressSection, string> = {
-	day: "Today",
-	week: "Week",
-	month: "Month",
-	year: "Year",
-};
-
 function HabitProgressChartEntry({
-	section,
+	label,
 	entry,
 }: {
-	section: ProgressSection;
+	label: string;
 	entry: ProgressEntry;
 }) {
 	const percentage = (100 * entry.value) / entry.goal;
@@ -32,7 +26,7 @@ function HabitProgressChartEntry({
 	return (
 		<Fragment>
 			<span className="text-right text-sm text-gray-500 dark:text-neutral-500">
-				{progressLabels[section]}
+				{label}
 			</span>
 			<div className="flex items-center rounded-sm overflow-hidden text-sm text-center bg-gray-200 dark:bg-neutral-700">
 				<div
@@ -51,27 +45,35 @@ function HabitProgressChartEntry({
 
 export const HabitProgressChart = observer(
 	({ habit }: HabitProgressChartProps) => {
+		const { t } = useTranslation();
 		const progress = useProgress(habit);
+
+		const labels: Record<ProgressSection, string> = {
+			day: t("label.today"),
+			week: t("label.week"),
+			month: t("label.month"),
+			year: t("label.year"),
+		};
 
 		return (
 			<Card>
-				<Card.Title>Goal</Card.Title>
+				<Card.Title>{t("label.goal")}</Card.Title>
 
 				<div className="grid grid-cols-[max-content,1fr] items-center gap-x-2 gap-y-1">
 					<HabitProgressChartEntry
-						section="day"
+						label={labels.day}
 						entry={progress.day}
 					/>
 					<HabitProgressChartEntry
-						section="week"
+						label={labels.week}
 						entry={progress.week}
 					/>
 					<HabitProgressChartEntry
-						section="month"
+						label={labels.month}
 						entry={progress.month}
 					/>
 					<HabitProgressChartEntry
-						section="year"
+						label={labels.year}
 						entry={progress.year}
 					/>
 				</div>

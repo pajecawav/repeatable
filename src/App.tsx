@@ -7,6 +7,8 @@ import { HomePage } from "./pages/home";
 import { NewHabitPage } from "./pages/new";
 import { SettingsPage } from "./pages/settings";
 
+import "./i18n";
+
 export const App = observer(() => {
 	return (
 		<div className="max-w-xl w-full mx-auto px-2 pb-2">

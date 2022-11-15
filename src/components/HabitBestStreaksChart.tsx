@@ -3,6 +3,7 @@ import { Habit } from "@/types";
 import { cn, formatDate } from "@/utils";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "./Card";
 
 interface HabitBestStreaksChartProps {
@@ -49,6 +50,7 @@ function StreakEntry({ streak, best }: { streak: Streak; best: number }) {
 
 export const HabitBestStreaksChart = observer(
 	({ habit }: HabitBestStreaksChartProps) => {
+		const { t } = useTranslation();
 		const streaks = useStreaks(habit);
 
 		const bestStreak = useMemo(
@@ -62,7 +64,7 @@ export const HabitBestStreaksChart = observer(
 
 		return (
 			<Card>
-				<Card.Title>Best streaks</Card.Title>
+				<Card.Title>{t("label.best-streaks")}</Card.Title>
 
 				<div className="text-sm flex flex-col gap-1">
 					{streaks.map(streak => (

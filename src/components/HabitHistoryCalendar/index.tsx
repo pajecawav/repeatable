@@ -3,11 +3,12 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { settingsStore } from "@/stores/settingsStore";
 import { DateKey, Habit } from "@/types";
-import { cn } from "@/utils";
+import { cn, formatMonthLabel } from "@/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Dayjs } from "dayjs";
 import { observer } from "mobx-react-lite";
 import { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "../Card";
 import { UpdateHabitProgressModal } from "../UpdateHabitProgressModal";
 import styles from "./HabitHistoryCalendar.module.css";
@@ -24,6 +25,7 @@ const CELL_SIZE = RECT_SIZE + CELL_SPACING;
 
 export const HabitHistoryCalendar = observer(
 	({ habit }: HabitHistoryCalendarProps) => {
+		const { t } = useTranslation();
 		const [selectedDateKey, setSelectedDateKey] = useState<DateKey | null>(
 			null
 		);
@@ -44,7 +46,7 @@ export const HabitHistoryCalendar = observer(
 			<>
 				<Card>
 					<div className="flex items-center justify-between">
-						<Card.Title>History</Card.Title>
+						<Card.Title>{t("label.history")}</Card.Title>
 
 						<div className="flex gap-1.5 sm:gap-0 text-gray-500 dark:text-neutral-500">
 							<button onClick={shiftLeft}>
@@ -155,6 +157,8 @@ const MonthLabels = memo(function MonthLabels({
 	startDate: Dayjs;
 	totalWeeks: number;
 }) {
+	useTranslation();
+
 	const labels = [];
 
 	let date = startDate;
@@ -170,7 +174,7 @@ const MonthLabels = memo(function MonthLabels({
 					x={CELL_SIZE * i + 1}
 					key={weekEnd.month()}
 				>
-					{weekEnd.format(labels.length === 0 ? "MMM YYYY" : "MMM")}
+					{formatMonthLabel(weekEnd.toDate(), labels.length === 0)}
 				</text>
 			);
 		}

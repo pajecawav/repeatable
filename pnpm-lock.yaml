@@ -18,6 +18,7 @@ specifiers:
   eslint-plugin-react: ^7.31.10
   eslint-plugin-react-hooks: ^4.6.0
   husky: ^8.0.2
+  i18next: ^22.0.5
   is-ci: ^3.0.1
   lint-staged: ^13.0.3
   mobx: ^6.6.2
@@ -26,6 +27,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.39.3
+  react-i18next: ^12.0.0
   tailwindcss: ^3.2.4
   typescript: ^4.8.4
   vite: ^3.2.3
@@ -39,11 +41,13 @@ dependencies:
   '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.13_react@18.2.0
   dayjs: 1.11.6
+  i18next: 22.0.5
   mobx: 6.6.2
   mobx-react-lite: 3.4.0_qrr2ojv4n7h7ey2xj7njerqqr4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.39.3_react@18.2.0
+  react-i18next: 12.0.0_e52s5leb62x5eudkmfoztpifde
   wouter: 2.8.1_react@18.2.0
 
 devDependencies:
@@ -1272,7 +1276,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
-    dev: true
 
   /@babel/template/7.18.10:
     resolution: {integrity: sha512-TI+rCtooWHr3QJ27kJxfjutghu44DLnasDMwpDqCXVTal9RLp3RSYNh4NdBrRP2cQAoG9A8juOQl6P6oZG4JxA==}
@@ -3025,6 +3028,12 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /html-parse-stringify/3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
   /human-signals/3.0.1:
     resolution: {integrity: sha512-rQLskxnM/5OCldHo+wNXbpVgDn5A17CUoKX+7Sokwaknlq7CdSnphy0W39GU8dw59XiCXmFXDg4fRuckQRKewQ==}
     engines: {node: '>=12.20.0'}
@@ -3035,6 +3044,12 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dev: true
+
+  /i18next/22.0.5:
+    resolution: {integrity: sha512-N2AXKCLHzv1ClfLqiwbAPJHClovfRv9iplySiZ/S3LfQ7PNjkVEkVpFbhCXDsPhQd6kLp6DKjbzpowniE8Mdiw==}
+    dependencies:
+      '@babel/runtime': 7.19.0
+    dev: false
 
   /idb/7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
@@ -3866,6 +3881,26 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-i18next/12.0.0_e52s5leb62x5eudkmfoztpifde:
+    resolution: {integrity: sha512-/O7N6aIEAl1FaWZBNvhdIo9itvF/MO/nRKr9pYqRc9LhuC1u21SlfwpiYQqvaeNSEW3g3qUXLREOWMt+gxrWbg==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.19.0
+      html-parse-stringify: 3.0.1
+      i18next: 22.0.5
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
@@ -3908,7 +3943,6 @@ packages:
 
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
-    dev: true
 
   /regenerator-transform/0.15.0:
     resolution: {integrity: sha512-LsrGtPmbYg19bcPHwdtmXwbW+TqNvtY4riE3P83foeHRroMbH6/2ddFBfab3t7kbzc7v7p4wbkIecHImqt0QNg==}
@@ -4517,6 +4551,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /void-elements/3.1.0:
+    resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /webidl-conversions/4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}

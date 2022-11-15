@@ -4,6 +4,7 @@ import { HabitHistoryCalendar } from "@/components/HabitHistoryCalendar";
 import { HabitProgressChart } from "@/components/HabitProgressChart";
 import { store } from "@/stores/habitsStore";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
 import { Link, Redirect, useLocation } from "wouter";
 
 interface HaibtPageProps {
@@ -13,6 +14,7 @@ interface HaibtPageProps {
 }
 
 export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
+	const { t } = useTranslation();
 	const [, setLocation] = useLocation();
 
 	const id = +idProp;
@@ -24,7 +26,7 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 	}
 
 	function handleDelete() {
-		if (confirm("Are you sure you want to delete this habit?")) {
+		if (confirm(t("message.confirm-delete"))) {
 			store.deleteHabit(id);
 			setLocation("/", { replace: true });
 		}
@@ -36,9 +38,9 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 				<h2 className="flex-1 text-3xl">{habit.name}</h2>
 
 				<Button as={Link} href={`/${id}/edit`}>
-					Edit
+					{t("label.edit")}
 				</Button>
-				<Button onClick={handleDelete}>Delete</Button>
+				<Button onClick={handleDelete}>{t("label.delete")}</Button>
 			</div>
 
 			<div className="text-neutral-500 dark:text-neutral-400">

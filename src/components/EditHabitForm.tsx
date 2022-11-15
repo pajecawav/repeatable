@@ -3,6 +3,7 @@ import { FormControl } from "@/components/FormControl";
 import { Input } from "@/components/Input";
 import { HabitCreate } from "@/stores/habitsStore";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface EditHabitFormProps {
 	onSubmit: (habit: EditHabitFormData) => void;
@@ -12,6 +13,8 @@ interface EditHabitFormProps {
 export type EditHabitFormData = Omit<HabitCreate, "type">;
 
 export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
+	const { t } = useTranslation();
+
 	const form = useForm<EditHabitFormData>({
 		shouldUseNativeValidation: true,
 		defaultValues,
@@ -23,11 +26,11 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 			onSubmit={form.handleSubmit(onSubmit)}
 		>
 			<FormControl>
-				<label htmlFor="name">Name</label>
+				<label htmlFor="name">{t("label.name")}</label>
 				<Input
 					className="w-full"
 					id="name"
-					placeholder="Read book"
+					placeholder={t("label.name-placeholder")}
 					{...form.register("name", {
 						required: true,
 						minLength: 1,
@@ -37,7 +40,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 
 			<div className="grid gap-x-2 grid-cols-2">
 				<FormControl>
-					<label htmlFor="goal">Goal</label>
+					<label htmlFor="goal">{t("label.goal")}</label>
 					<Input
 						className="w-full"
 						id="goal"
@@ -52,11 +55,11 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 				</FormControl>
 
 				<FormControl>
-					<label htmlFor="unit">Units</label>
+					<label htmlFor="unit">{t("label.units")}</label>
 					<Input
 						className="w-full"
 						id="unit"
-						placeholder="pages"
+						placeholder={t("label.units-placeholder")}
 						autoCapitalize="off"
 						{...form.register("unit", {
 							required: true,
@@ -66,7 +69,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 				</FormControl>
 			</div>
 
-			<Button className="mx-auto shadow-sm">Save</Button>
+			<Button className="mx-auto shadow-sm">{t("label.save")}</Button>
 		</form>
 	);
 }
