@@ -37,7 +37,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 
 			<div className="grid gap-x-2 grid-cols-2">
 				<FormControl>
-					<label htmlFor="name">Goal</label>
+					<label htmlFor="goal">Goal</label>
 					<Input
 						className="w-full"
 						id="goal"
@@ -52,7 +52,7 @@ export function EditHabitForm({ onSubmit, defaultValues }: EditHabitFormProps) {
 				</FormControl>
 
 				<FormControl>
-					<label htmlFor="name">Units</label>
+					<label htmlFor="unit">Units</label>
 					<Input
 						className="w-full"
 						id="unit"
