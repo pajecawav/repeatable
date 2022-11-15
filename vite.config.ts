@@ -18,12 +18,6 @@ const manifest: Partial<ManifestOptions> = {
 			sizes: "512x512",
 			type: "image/png",
 		},
-		{
-			src: "/android-chrome-512x512.png",
-			sizes: "512x512",
-			type: "image/png",
-			purpose: "any maskable",
-		},
 	],
 	theme_color: "#000000",
 	background_color: "#ffffff",
