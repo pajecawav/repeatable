@@ -159,10 +159,13 @@ export const SettingsPage = observer(() => {
 					</Description>
 				</InfoContainer>
 
-				<Button as="label" className="cursor-pointer">
+				<Button
+					as="label"
+					className="cursor-pointer focus-within:[outline:auto]"
+				>
 					{t("label.import")}
 					<input
-						className="hidden"
+						className="sr-only"
 						type="file"
 						accept="application/json"
 						onChange={handleImport}
