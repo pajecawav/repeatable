@@ -21,7 +21,7 @@ export function HomePage() {
 					{t("label.new")}
 				</Button>
 
-				<div className="ml-auto  w-1/2 sm:w-2/5 flex text-gray-500 text-center text-sm leading-tight font-medium dark:text-neutral-400">
+				<div className="ml-auto  w-1/2 sm:w-[45%] flex text-gray-500 text-center text-sm leading-tight font-medium dark:text-neutral-400">
 					{recentDates.map(date => (
 						<div className="flex-1" key={date.toISOString()}>
 							<div>{getShortWeekDay(date)}</div>

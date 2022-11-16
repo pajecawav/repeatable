@@ -102,7 +102,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 				{habit.name}
 			</Link>
 
-			<div className="flex-shrink-0 w-1/2 sm:w-2/5 flex text-center leading-tight">
+			<div className="flex-shrink-0 w-1/2 sm:w-[45%] flex text-center leading-tight">
 				{dateKeys.map(dateKey => (
 					<DateProgressLabel
 						habit={habit}
