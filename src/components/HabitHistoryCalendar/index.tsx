@@ -3,7 +3,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { settingsStore } from "@/stores/settingsStore";
 import { DateKey, Habit } from "@/types";
-import { cn, formatMonthLabel } from "@/utils";
+import { cn, formatMonthLabel, getWeekDays } from "@/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Dayjs } from "dayjs";
 import { observer } from "mobx-react-lite";
@@ -190,7 +190,8 @@ const WeekDayLabels = observer(function ({
 }: {
 	totalWeeks: number;
 }) {
-	let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	useTranslation();
+	let weekDays = getWeekDays();
 
 	const startIndex = settingsStore.startOfWeek;
 	weekDays = [

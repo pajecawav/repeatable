@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import i18n from "./i18n";
 
 export function cn(
@@ -32,4 +33,18 @@ export function formatMonthLabel(date: Date, withYear: boolean): string {
 	}
 
 	return new Intl.DateTimeFormat(i18n.language, options).format(date);
+}
+
+export function getWeekDays(): string[] {
+	const intl = new Intl.DateTimeFormat(i18n.language, { weekday: "short" });
+
+	const weekDays = [];
+
+	const date = dayjs().startOf("week");
+	for (let i = 0; i < 7; i++) {
+		const weekDay = intl.format(date.add(i, "days").toDate());
+		weekDays.push(weekDay);
+	}
+
+	return weekDays;
 }
