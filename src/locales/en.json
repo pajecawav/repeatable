@@ -4,6 +4,9 @@
 		"label.edit": "Edit",
 		"label.delete": "Delete",
 		"label.save": "Save",
+		"label.update-value": "Update value",
+		"label.go-back": "Go back",
+		"label.go-settings": "Go to settings",
 
 		"label.name": "Name",
 		"label.name-placeholder": "Read book",

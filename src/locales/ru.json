@@ -4,6 +4,9 @@
 		"label.edit": "Изменить",
 		"label.delete": "Удалить",
 		"label.save": "Сохранить",
+		"label.update-value": "Изменить значение",
+		"label.go-back": "На предыдущую страницу",
+		"label.go-settings": "Перейти к настройкам",
 
 		"label.name": "Название",
 		"label.name-placeholder": "Прочитать книгу",

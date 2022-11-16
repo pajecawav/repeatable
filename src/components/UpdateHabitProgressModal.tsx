@@ -2,6 +2,7 @@ import { Modal } from "@/Modal";
 import { store } from "@/stores/habitsStore";
 import { DateKey } from "@/types";
 import { FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./Button";
 import { Input } from "./Input";
 
@@ -20,6 +21,8 @@ export function UpdateHabitProgressModal({
 	date,
 	onClose,
 }: UpdateHabitProgressModalProps) {
+	const { t } = useTranslation();
+
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
@@ -31,7 +34,7 @@ export function UpdateHabitProgressModal({
 	}
 
 	return (
-		<Modal title="Update value" onClose={onClose}>
+		<Modal title={t("label.update-value")} onClose={onClose}>
 			<form
 				className="w-48 flex flex-col items-center gap-2"
 				onSubmit={handleSubmit}
@@ -51,7 +54,7 @@ export function UpdateHabitProgressModal({
 				</div>
 
 				<Button className="ml-auto border border-neutral-200 dark:border-none">
-					Save
+					{t("label.save")}
 				</Button>
 			</form>
 		</Modal>

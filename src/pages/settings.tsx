@@ -10,6 +10,11 @@ import { observer } from "mobx-react-lite";
 import { ChangeEvent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+const languages: Record<Lang, string> = {
+	en: "English",
+	ru: "Русский",
+};
+
 function Section({ children }: { children: ReactNode }) {
 	return <div className="flex gap-1 items-center">{children}</div>;
 }
@@ -83,8 +88,11 @@ export const SettingsPage = observer(() => {
 					}
 					value={settingsStore.lang}
 				>
-					<option value="en">English</option>
-					<option value="ru">Русский</option>
+					{Object.entries(languages).map(([lang, name]) => (
+						<option value={lang} key={lang}>
+							{name}
+						</option>
+					))}
 				</Select>
 			</Section>
 
