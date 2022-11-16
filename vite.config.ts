@@ -19,7 +19,7 @@ const manifest: Partial<ManifestOptions> = {
 			type: "image/png",
 		},
 	],
-	theme_color: "#000000",
+	theme_color: "#171717",
 	background_color: "#ffffff",
 	display: "standalone",
 	orientation: "portrait",
