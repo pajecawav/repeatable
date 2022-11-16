@@ -12,13 +12,15 @@ import {
 	SortableContext,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { t } from "i18next";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { HabitListEntry } from "./HabitsListEntry";
 
 export const HabitsList = observer(() => {
+	const { t } = useTranslation();
+
 	const habits = useMemo(
 		() =>
 			computed(() => {
