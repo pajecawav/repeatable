@@ -169,7 +169,7 @@ export const SettingsPage = observer(() => {
 			</Section>
 
 			<a
-				className="text-center hover:underline text-neutral-400 dark:text-neutral-600"
+				className="mx-auto hover:underline text-neutral-400 dark:text-neutral-600"
 				href="https://github.com/pajecawav/repeatable"
 				target="_blank"
 				rel="noreferrer noopener"
