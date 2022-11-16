@@ -9,6 +9,7 @@ import { Theme, themeStore } from "@/stores/themeStore";
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import { version } from "../../package.json";
 
 const languages: Record<Lang, string> = {
 	en: "English",
@@ -166,6 +167,15 @@ export const SettingsPage = observer(() => {
 					/>
 				</Button>
 			</Section>
+
+			<a
+				className="text-center hover:underline text-neutral-400 dark:text-neutral-600"
+				href="https://github.com/pajecawav/repeatable"
+				target="_blank"
+				rel="noreferrer noopener"
+			>
+				v{version}
+			</a>
 		</div>
 	);
 });
