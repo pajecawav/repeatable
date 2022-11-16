@@ -12,6 +12,7 @@ import {
 	SortableContext,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { t } from "i18next";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
@@ -51,7 +52,7 @@ export const HabitsList = observer(() => {
 	if (habits.length === 0) {
 		return (
 			<div className="h-32 grid place-items-center text-xl text-neutral-500 border-b border-neutral-300 dark:border-neutral-800">
-				No habits in the list.
+				{t("message.no-habits")}
 			</div>
 		);
 	}

@@ -49,6 +49,7 @@
 		"label.settings.import.title": "Import data",
 		"label.settings.import.description": "Load previously exported habits.",
 
+		"message.no-habits": "No habits in the list.",
 		"message.confirm-delete": "Are you sure you want to delete this habit?",
 		"message.habit-created": "Habit added.",
 		"message.habit-updated": "Updated habit.",

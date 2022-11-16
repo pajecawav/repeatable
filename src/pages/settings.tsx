@@ -103,7 +103,7 @@ export const SettingsPage = observer(() => {
 				<InfoContainer>
 					<Title>{t("label.settings.theme.title")}</Title>
 					<Description>
-						{t("label.settings.language.description")}
+						{t("label.settings.theme.description")}
 					</Description>
 				</InfoContainer>
 				<Select

@@ -49,6 +49,7 @@
 		"label.settings.import.title": "Импортировать данные",
 		"label.settings.import.description": "Импортировать ранее экспортированные данные.",
 
+		"message.no-habits": "Список пуст.",
 		"message.confirm-delete": "Вы действительно хотите удалить эту привычку?",
 		"message.habit-created": "Привычка создана.",
 		"message.habit-updated": "Привычка обновлена.",
