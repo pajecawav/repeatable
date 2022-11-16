@@ -1,5 +1,7 @@
 import { EditHabitForm, EditHabitFormData } from "@/components/EditHabitForm";
 import { store } from "@/stores/habitsStore";
+import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { Redirect, useLocation } from "wouter";
 
 interface EditHaibtPageProps {
@@ -9,6 +11,7 @@ interface EditHaibtPageProps {
 }
 
 export function EditHabitPage({ params: { id: idProp } }: EditHaibtPageProps) {
+	const { t } = useTranslation();
 	const [, setLocation] = useLocation();
 
 	const id = +idProp;
@@ -22,6 +25,7 @@ export function EditHabitPage({ params: { id: idProp } }: EditHaibtPageProps) {
 	function handleSubmit(data: EditHabitFormData) {
 		store.updateHabit(id, data);
 		setLocation(`/${id}`);
+		toast(t("message.habit-updated"));
 	}
 
 	return (

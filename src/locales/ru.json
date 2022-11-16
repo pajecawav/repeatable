@@ -49,6 +49,11 @@
 		"label.settings.import.title": "Импортировать данные",
 		"label.settings.import.description": "Импортировать ранее экспортированные данные.",
 
-		"message.confirm-delete": "Вы действительно хотите удалить эту привычку?"
+		"message.confirm-delete": "Вы действительно хотите удалить эту привычку?",
+		"message.habit-created": "Привычка создана.",
+		"message.habit-updated": "Привычка обновлена.",
+		"message.habit-deleted": "Привычка удалена.",
+		"message.data-exported": "Данные экспортированы.",
+		"message.data-imported": "Данные импортированы."
 	}
 }

@@ -4,6 +4,7 @@ import { HabitHistoryCalendar } from "@/components/HabitHistoryCalendar";
 import { HabitProgressChart } from "@/components/HabitProgressChart";
 import { store } from "@/stores/habitsStore";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link, Redirect, useLocation } from "wouter";
 
@@ -29,6 +30,7 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 		if (confirm(t("message.confirm-delete"))) {
 			store.deleteHabit(id);
 			setLocation("/", { replace: true });
+			toast(t("message.habit-deleted"));
 		}
 	}
 

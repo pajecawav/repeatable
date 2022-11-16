@@ -8,10 +8,20 @@ import { NewHabitPage } from "./pages/new";
 import { SettingsPage } from "./pages/settings";
 
 import "./i18n";
+import { Toaster } from "react-hot-toast";
 
 export const App = observer(() => {
 	return (
 		<div className="max-w-xl w-full mx-auto px-2 pb-2">
+			<Toaster
+				position="bottom-center"
+				toastOptions={{
+					blank: {
+						className: "dark:text-inherit dark:bg-neutral-800",
+					},
+				}}
+			/>
+
 			<Header />
 
 			<Switch>

@@ -8,6 +8,7 @@ import { Lang, settingsStore, WeekDay } from "@/stores/settingsStore";
 import { Theme, themeStore } from "@/stores/themeStore";
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, ReactNode } from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { version } from "../../package.json";
 
@@ -35,12 +36,13 @@ function Description({ children }: { children: ReactNode }) {
 export const SettingsPage = observer(() => {
 	const { t } = useTranslation();
 
-	function handleExport() {
+	async function handleExport() {
 		const data: DataBackup = {
 			version: SCHEMA_VERSION,
 			habits: store.habits,
 		};
 		exportData(data);
+		toast(t("message.data-exported"));
 	}
 
 	async function handleImport(e: ChangeEvent<HTMLInputElement>) {
@@ -51,8 +53,8 @@ export const SettingsPage = observer(() => {
 		}
 
 		const data = await importData(file);
-		// TODO: show toast?
 		store.replaceHabits(data.habits);
+		toast(t("message.data-imported"));
 	}
 
 	const separator = (
