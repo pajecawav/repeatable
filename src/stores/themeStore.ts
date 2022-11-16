@@ -20,11 +20,14 @@ function saveTheme(theme: Theme) {
 
 function rawSetTheme(theme: "light" | "dark") {
 	const root = document.documentElement;
+	const meta = document.querySelector("meta[name='theme-color']");
 
 	if (theme === "dark") {
 		root.classList.add("dark");
+		meta?.setAttribute("content", "#171717");
 	} else {
 		root.classList.remove("dark");
+		meta?.setAttribute("content", "#f5f5f5");
 	}
 }
 
