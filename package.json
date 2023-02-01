@@ -7,6 +7,7 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
+		"test": "playwright test",
 		"format": "prettier './**/*.{js,jsx,ts,tsx,css,json,md,yml}' --write",
 		"format:check": "prettier --check './**/*.{js,jsx,ts,tsx,css,json,md,yml}'",
 		"lint": "eslint .",
@@ -35,6 +36,8 @@
 		"wouter": "2.9.2"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.30.0",
+		"@types/node": "^18.11.18",
 		"@types/react": "^18.0.27",
 		"@types/react-dom": "^18.0.10",
 		"@typescript-eslint/eslint-plugin": "^5.49.0",
