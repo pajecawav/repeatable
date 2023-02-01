@@ -90,6 +90,7 @@ export const SettingsPage = observer(() => {
 						settingsStore.setLang(e.target.value as Lang)
 					}
 					value={settingsStore.lang}
+					data-testid="language-select"
 				>
 					{Object.entries(languages).map(([lang, name]) => (
 						<option value={lang} key={lang}>
@@ -109,6 +110,7 @@ export const SettingsPage = observer(() => {
 				<Select
 					onChange={e => themeStore.setTheme(e.target.value as Theme)}
 					value={themeStore.theme}
+					data-testid="theme-select"
 				>
 					<option value="system">{t("label.theme.system")}</option>
 					<option value="light">{t("label.theme.light")}</option>

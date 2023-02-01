@@ -1,9 +1,34 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
+import { defineConfig, devices, Project } from "@playwright/test";
 
-const config: PlaywrightTestConfig = {
+const projects: Project[] = [
+	{
+		name: "chromium",
+		use: {
+			...devices["Desktop Chrome"],
+		},
+	},
+];
+
+if (process.env.CI) {
+	projects.push(
+		{
+			name: "firefox",
+			use: {
+				...devices["Desktop Firefox"],
+			},
+		},
+		{
+			name: "webkit",
+			use: {
+				...devices["Desktop Safari"],
+			},
+		}
+	);
+}
+
+export default defineConfig({
 	testDir: "./tests",
-	timeout: 30 * 1000,
+	timeout: 10 * 1000,
 	expect: {
 		timeout: 5000,
 	},
@@ -11,7 +36,7 @@ const config: PlaywrightTestConfig = {
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	workers: process.env.CI ? 1 : undefined,
-	reporter: "html",
+	reporter: process.env.CI ? "html" : "line",
 	use: {
 		baseURL: "http://localhost:5173",
 		actionTimeout: 0,
@@ -24,26 +49,5 @@ const config: PlaywrightTestConfig = {
 		reuseExistingServer: !process.env.CI,
 	},
 	outputDir: "test-results/",
-	projects: [
-		{
-			name: "chromium",
-			use: {
-				...devices["Desktop Chrome"],
-			},
-		},
-		{
-			name: "firefox",
-			use: {
-				...devices["Desktop Firefox"],
-			},
-		},
-		{
-			name: "webkit",
-			use: {
-				...devices["Desktop Safari"],
-			},
-		},
-	],
-};
-
-export default config;
+	projects,
+});

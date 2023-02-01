@@ -18,7 +18,7 @@ export function Toggle({ className, checked, srText, ...props }: ToggleProps) {
 			checked={checked}
 			{...props}
 		>
-			<span className="sr-only">{srText}</span>
+			{srText && <span className="sr-only">{srText}</span>}
 			<span
 				className={cn(
 					checked
