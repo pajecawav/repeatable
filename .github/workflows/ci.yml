@@ -1,10 +1,14 @@
-name: Build
+name: CI
 
 on:
     pull_request:
         branches: [master]
     push:
         branches: [master]
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
 
 jobs:
     build:
@@ -31,3 +35,35 @@ jobs:
 
             - name: Lint
               run: pnpm lint
+
+    e2e:
+        timeout-minutes: 5
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7
+
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Install Playwright browsers
+              run: pnpm playwright install --with-deps
+
+            - name: Run tests
+              run: pnpm test
+
+            - uses: actions/upload-artifact@v3
+              if: always()
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 30
