@@ -1,4 +1,5 @@
-import { expect, Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { createRandomHabit, visitHabitPage } from "./utils.js";
 
 test.describe("habit form", () => {
 	test.beforeEach(async ({ page }) => {
@@ -48,32 +49,3 @@ test("can delete habit", async ({ page }) => {
 	await page.goto("/");
 	await expect(page.getByText(habit.name)).not.toBeVisible();
 });
-
-type RandomHabit = ReturnType<typeof randomHabit>;
-
-function randomHabit() {
-	return {
-		name: "Hello world",
-		goal: Math.floor(Math.random() * 100),
-		units: "times",
-	};
-}
-
-async function fillHabitForm(page: Page, habit: RandomHabit) {
-	await page.getByLabel("name").fill(habit.name);
-	await page.getByLabel("goal").fill(habit.goal.toString());
-	await page.getByLabel("units").fill(habit.units);
-}
-
-async function createRandomHabit(page: Page) {
-	const habit = randomHabit();
-	await page.goto("/new");
-	await fillHabitForm(page, habit);
-	await page.getByRole("button", { name: "save" }).click();
-	return habit;
-}
-
-async function visitHabitPage(page: Page, name: string) {
-	await page.goto("/");
-	await page.getByRole("link", { name }).click();
-}
