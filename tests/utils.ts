@@ -1,12 +1,13 @@
+import { faker } from "@faker-js/faker";
 import { Page } from "@playwright/test";
 
 export type RandomHabit = ReturnType<typeof randomHabit>;
 
 export function randomHabit() {
 	return {
-		name: "Hello world",
-		goal: Math.floor(Math.random() * 100),
-		units: "times",
+		name: faker.lorem.sentence(),
+		goal: faker.datatype.number({ min: 1, max: 100 }),
+		units: faker.lorem.word(),
 	};
 }
 

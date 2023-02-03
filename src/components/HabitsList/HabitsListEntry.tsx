@@ -98,6 +98,7 @@ export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
 				className="truncate flex-shrink-1 flex-1"
 				href={`/${habit.id}`}
 				style={{ WebkitTapHighlightColor: "transparent" }}
+				data-testid="habit-name"
 			>
 				{habit.name}
 			</Link>

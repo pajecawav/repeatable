@@ -4,6 +4,7 @@ specifiers:
   '@dnd-kit/core': ^6.0.7
   '@dnd-kit/sortable': ^7.0.2
   '@dnd-kit/utilities': ^3.2.1
+  '@faker-js/faker': ^7.6.0
   '@headlessui/react': ^1.7.7
   '@heroicons/react': ^2.0.14
   '@playwright/test': ^1.30.0
@@ -57,6 +58,7 @@ dependencies:
   wouter: 2.9.2_react@18.2.0
 
 devDependencies:
+  '@faker-js/faker': 7.6.0
   '@playwright/test': 1.30.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
@@ -1515,6 +1517,11 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
   /@headlessui/react/1.7.8_biqbaboplfbrettd7655fr4n2y:
