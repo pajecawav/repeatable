@@ -36,6 +36,12 @@ jobs:
             - name: Lint
               run: pnpm lint
 
+            - uses: actions/upload-artifact@v3
+              with:
+                  name: bundle-stats
+                  path: stats/stats.html
+                  retention-days: 30
+
     e2e:
         timeout-minutes: 5
 

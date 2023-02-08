@@ -1,5 +1,6 @@
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
 
@@ -35,6 +36,7 @@ export default defineConfig({
 				globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
 			},
 		}),
+		visualizer({ filename: "stats/stats.html" }),
 	],
 	resolve: {
 		alias: {
