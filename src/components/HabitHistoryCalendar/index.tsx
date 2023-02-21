@@ -1,4 +1,5 @@
 import { useHabitHistory } from "@/hooks/useHabitHistory";
+import { useHorizontalSwipe } from "@/hooks/useHorizontalSwipe";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getDateKey } from "@/lib";
 import { settingsStore } from "@/stores/settingsStore";
@@ -7,7 +8,7 @@ import { cn, formatMonthLabel, getWeekDays } from "@/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Dayjs } from "dayjs";
 import { observer } from "mobx-react-lite";
-import { memo, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../Card";
 import { UpdateHabitProgressModal } from "../UpdateHabitProgressModal";
@@ -26,6 +27,8 @@ const CELL_SIZE = RECT_SIZE + CELL_SPACING;
 export const HabitHistoryCalendar = observer(
 	({ habit }: HabitHistoryCalendarProps) => {
 		const { t } = useTranslation();
+		const ref = useRef<SVGSVGElement>(null);
+
 		const [selectedDateKey, setSelectedDateKey] = useState<DateKey | null>(
 			null
 		);
@@ -37,6 +40,12 @@ export const HabitHistoryCalendar = observer(
 			habit,
 			totalWeeks
 		);
+
+		useHorizontalSwipe(ref, {
+			threshold: 20,
+			onSwipeLeft: shiftLeft,
+			onSwipeRight: shiftRight,
+		});
 
 		function indexesToDate(weekIndex: number, dayIndex: number): Dayjs {
 			return data.startDate.add(weekIndex * 7 + dayIndex, "day");
@@ -63,6 +72,7 @@ export const HabitHistoryCalendar = observer(
 					</div>
 
 					<svg
+						ref={ref}
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox={`0 0 ${totalWeeks * CELL_SIZE + 12} ${
 							HEADER_SIZE + 7 * CELL_SIZE
