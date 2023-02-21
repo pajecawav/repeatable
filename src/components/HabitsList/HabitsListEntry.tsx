@@ -1,5 +1,4 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
-import { useRecentDates } from "@/hooks/useRecentDates";
 import { SixVerticalDotsIcon } from "@/icons/SixVerticalDotsIcon";
 import { getDateKey } from "@/lib";
 import { DateKey, Habit } from "@/types";
@@ -45,73 +44,80 @@ function DateProgressLabel({ date, habit }: { date: DateKey; habit: Habit }) {
 	);
 }
 
-export const HabitListEntry = observer(({ habit }: { habit: Habit }) => {
-	const {
-		attributes,
-		listeners,
-		setNodeRef,
-		transform,
-		transition,
-		isDragging,
-		isOver,
-		isSorting,
-	} = useSortable({ id: habit.id, attributes: { tabIndex: -1 } });
+interface HabitsListEntryProps {
+	habit: Habit;
+	dates: Date[];
+}
 
-	const style: CSSProperties = {
-		transform: transform ? `translateY(${transform.y}px)` : undefined,
-		transition,
-		pointerEvents: isDragging ? "none" : undefined,
-	};
+export const HabitsListEntry = observer(
+	({ habit, dates }: HabitsListEntryProps) => {
+		const {
+			attributes,
+			listeners,
+			setNodeRef,
+			transform,
+			transition,
+			isDragging,
+			isOver,
+			isSorting,
+		} = useSortable({ id: habit.id, attributes: { tabIndex: -1 } });
 
-	const now = new Date();
+		const style: CSSProperties = {
+			transform: transform ? `translateY(${transform.y}px)` : undefined,
+			transition,
+			pointerEvents: isDragging ? "none" : undefined,
+		};
 
-	const todayKey = getDateKey(now);
-	const entryToday = habit.entries[todayKey];
-	const progress = (entryToday?.value ?? 0) / habit.goal;
+		const now = new Date();
 
-	const dateKeys: DateKey[] = useRecentDates().map(getDateKey);
+		const todayKey = getDateKey(now);
+		const entryToday = habit.entries[todayKey];
+		const progress = (entryToday?.value ?? 0) / habit.goal;
 
-	return (
-		<div
-			className="group relative cursor-auto touch-none shadow-sm flex items-center gap-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
-			ref={setNodeRef}
-			style={style}
-			{...attributes}
-			{...listeners}
-		>
-			{(!isSorting || isDragging) && (
-				<SixVerticalDotsIcon
-					className={cn(
-						"absolute left-0 -translate-x-full w-6 h-6 opacity-0 hidden sm:block",
-						"text-gray-400 dark:text-neutral-500 cursor-grab outline-none transition-opacity duration-200 group-hover:duration-75",
-						!isOver && !isDragging && "group-hover:opacity-100"
-					)}
-				/>
-			)}
+		const dateKeys: DateKey[] = dates.map(getDateKey);
 
-			<CircularProgress
-				className="text-xl flex-shrink-0"
-				progress={progress}
-			/>
-
-			<Link
-				className="truncate flex-shrink-1 flex-1"
-				href={`/${habit.id}`}
-				style={{ WebkitTapHighlightColor: "transparent" }}
-				data-testid="habit-name"
+		return (
+			<div
+				className="group relative cursor-auto touch-none shadow-sm flex items-center gap-2 px-2 sm:px-4 py-2 rounded-md bg-white text-sky-600 dark:bg-neutral-800 dark:text-blue-400"
+				ref={setNodeRef}
+				style={style}
+				{...attributes}
+				{...listeners}
 			>
-				{habit.name}
-			</Link>
-
-			<div className="flex-shrink-0 w-1/2 sm:w-[45%] flex text-center leading-tight">
-				{dateKeys.map(dateKey => (
-					<DateProgressLabel
-						habit={habit}
-						date={dateKey}
-						key={dateKey}
+				{(!isSorting || isDragging) && (
+					<SixVerticalDotsIcon
+						className={cn(
+							"absolute left-0 -translate-x-full w-6 h-6 opacity-0 hidden sm:block",
+							"text-gray-400 dark:text-neutral-500 cursor-grab outline-none transition-opacity duration-200 group-hover:duration-75",
+							!isOver && !isDragging && "group-hover:opacity-100"
+						)}
 					/>
-				))}
+				)}
+
+				<CircularProgress
+					className="text-xl flex-shrink-0"
+					progress={progress}
+				/>
+
+				<Link
+					className="truncate flex-shrink-1 flex-1"
+					href={`/${habit.id}`}
+					style={{ WebkitTapHighlightColor: "transparent" }}
+					data-testid="habit-name"
+				>
+					{habit.name}
+				</Link>
+
+				<div className="flex-shrink-0 w-1/2 sm:w-[45%] flex text-center leading-tight">
+					{dateKeys.map(dateKey => (
+						<DateProgressLabel
+							habit={habit}
+							date={dateKey}
+							key={dateKey}
+						/>
+					))}
+				</div>
 			</div>
-		</div>
-	);
-});
+		);
+	}
+);

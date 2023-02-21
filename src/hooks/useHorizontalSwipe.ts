@@ -30,7 +30,6 @@ export function useHorizontalSwipe(
 		}
 
 		function handleMove(event: TouchEvent) {
-			// TODO: find initial touch by id
 			const touch = [...event.changedTouches].find(
 				t => t.identifier === touchId
 			);

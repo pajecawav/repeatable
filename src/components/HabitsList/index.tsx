@@ -16,9 +16,13 @@ import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { HabitListEntry } from "./HabitsListEntry";
+import { HabitsListEntry } from "./HabitsListEntry";
 
-export const HabitsList = observer(() => {
+interface HabitsListProps {
+	dates: Date[];
+}
+
+export const HabitsList = observer(({ dates }: HabitsListProps) => {
 	const { t } = useTranslation();
 
 	const habits = useMemo(
@@ -71,7 +75,11 @@ export const HabitsList = observer(() => {
 			>
 				<div className="flex flex-col gap-2 text-sm sm:text-base">
 					{habits.map(habit => (
-						<HabitListEntry habit={habit} key={habit.id} />
+						<HabitsListEntry
+							habit={habit}
+							dates={dates}
+							key={habit.id}
+						/>
 					))}
 				</div>
 			</SortableContext>
