@@ -38,6 +38,7 @@ export const HabitsList = observer(({ dates }: HabitsListProps) => {
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
 			activationConstraint: { delay: 100, tolerance: 10 },
+			onActivation: () => navigator.vibrate?.(100),
 		})
 	);
 
