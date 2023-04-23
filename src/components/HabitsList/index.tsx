@@ -38,7 +38,6 @@ export const HabitsList = observer(({ dates }: HabitsListProps) => {
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
 			activationConstraint: { delay: 100, tolerance: 10 },
-			onActivation: () => navigator.vibrate?.(100),
 		})
 	);
 
@@ -69,6 +68,7 @@ export const HabitsList = observer(({ dates }: HabitsListProps) => {
 			sensors={sensors}
 			collisionDetection={closestCenter}
 			onDragEnd={handleDragEnd}
+			onDragStart={() => navigator.vibrate?.(100)}
 		>
 			<SortableContext
 				items={habits.map(habit => habit.id)}
