@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { ChartBarIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
 import { Link, useRoute } from "wouter";
 
@@ -11,7 +11,7 @@ export function Header() {
 			{!isHomePage && (
 				<Link href="/">
 					<a href="/" aria-label={t("label.go-home")}>
-						<ArrowLeftIcon className="h-6" />
+						<ChartBarIcon className="h-6" />
 					</a>
 				</Link>
 			)}
