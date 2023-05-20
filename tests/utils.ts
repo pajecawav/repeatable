@@ -6,7 +6,7 @@ export type RandomHabit = ReturnType<typeof randomHabit>;
 export function randomHabit() {
 	return {
 		name: faker.lorem.sentence(),
-		goal: faker.datatype.number({ min: 1, max: 100 }),
+		goal: faker.number.int({ min: 1, max: 100 }),
 		units: faker.lorem.word(),
 	};
 }
