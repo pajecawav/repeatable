@@ -22,7 +22,7 @@ if (process.env.CI) {
 			use: {
 				...devices["Desktop Safari"],
 			},
-		}
+		},
 	);
 }
 

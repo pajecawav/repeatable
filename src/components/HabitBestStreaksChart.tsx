@@ -33,7 +33,7 @@ function StreakEntry({ streak, best }: { streak: Streak; best: number }) {
 					percentageOfBest > 0.5 &&
 						"bg-sky-600 text-white dark:bg-blue-500 dark:text-neutral-800",
 					percentageOfBest <= 0.5 &&
-						"bg-gray-200 text-gray-600 dark:bg-neutral-700 dark:text-neutral-400"
+						"bg-gray-200 text-gray-600 dark:bg-neutral-700 dark:text-neutral-400",
 				)}
 				style={{ flexGrow: percentageOfBest }}
 			>
@@ -57,9 +57,9 @@ export const HabitBestStreaksChart = observer(
 			() =>
 				streaks.reduce(
 					(best, streak) => Math.max(best, streak.length),
-					0
+					0,
 				),
-			[streaks]
+			[streaks],
 		);
 
 		return (
@@ -77,5 +77,5 @@ export const HabitBestStreaksChart = observer(
 				</div>
 			</Card>
 		);
-	}
+	},
 );

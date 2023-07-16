@@ -32,13 +32,13 @@ export const HabitsList = observer(({ dates }: HabitsListProps) => {
 					? store.uncompletedHabits
 					: store.habits;
 			}),
-		[]
+		[],
 	).get();
 
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
 			activationConstraint: { delay: 100, tolerance: 10 },
-		})
+		}),
 	);
 
 	function handleDragEnd(event: DragEndEvent) {
@@ -46,10 +46,10 @@ export const HabitsList = observer(({ dates }: HabitsListProps) => {
 
 		if (over && active.id !== over.id) {
 			const oldIndex = store.habits.findIndex(
-				habit => habit.id === active.id
+				habit => habit.id === active.id,
 			);
 			const newIndex = store.habits.findIndex(
-				habit => habit.id === over.id
+				habit => habit.id === over.id,
 			);
 			store.moveHabit(oldIndex, newIndex);
 		}

@@ -10,7 +10,7 @@ export function Select({ className, ...props }: SelectProps) {
 			<select
 				className={cn(
 					"pl-4 pr-8 py-1 shadow-sm rounded-md bg-white appearance-none dark:bg-neutral-800",
-					className
+					className,
 				)}
 				{...props}
 			/>

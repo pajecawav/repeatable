@@ -33,7 +33,7 @@ export const useMediaQuery = (size: Size, useMax = false) => {
 		: `(min-width: ${min}px)`;
 
 	const [matches, setMatches] = useState(
-		() => window.matchMedia(mediaQuery).matches
+		() => window.matchMedia(mediaQuery).matches,
 	);
 
 	useEffect(() => {

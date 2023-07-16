@@ -13,7 +13,7 @@ export function Toggle({ className, checked, srText, ...props }: ToggleProps) {
 				checked
 					? "bg-blue-500 dark:bg-blue-500"
 					: "bg-white dark:bg-neutral-800",
-				className
+				className,
 			)}
 			checked={checked}
 			{...props}
@@ -24,7 +24,7 @@ export function Toggle({ className, checked, srText, ...props }: ToggleProps) {
 					checked
 						? "translate-x-6 bg-white"
 						: "translate-x-1 bg-neutral-600",
-					"inline-block h-4 w-4 transform transition-transform rounded-full dark:bg-current"
+					"inline-block h-4 w-4 transform transition-transform rounded-full dark:bg-current",
 				)}
 			/>
 		</Switch>

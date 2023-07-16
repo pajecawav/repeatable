@@ -9,13 +9,13 @@ export function cn(
 
 export function getShortWeekDay(date: Date): string {
 	return new Intl.DateTimeFormat(i18n.language, { weekday: "short" }).format(
-		date
+		date,
 	);
 }
 
 export function formatValue(value: number): string {
 	return new Intl.NumberFormat(i18n.language, { notation: "compact" }).format(
-		value
+		value,
 	);
 }
 

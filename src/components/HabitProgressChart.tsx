@@ -79,5 +79,5 @@ export const HabitProgressChart = observer(
 				</div>
 			</Card>
 		);
-	}
+	},
 );

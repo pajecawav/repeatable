@@ -7,7 +7,7 @@ export function useRecentDates() {
 
 	const shiftLater = useCallback(
 		() => setOffset(offset => Math.min(0, offset + 1)),
-		[]
+		[],
 	);
 
 	const recentDates = Array.from({ length: 4 }, (_, i) => {

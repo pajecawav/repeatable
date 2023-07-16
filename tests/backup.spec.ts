@@ -14,7 +14,7 @@ test.describe("backup", () => {
 		await page.goto("/settings");
 
 		const localStorageSnapshot = await page.evaluate(
-			`JSON.parse(window.localStorage.getItem("${LOCALSTORAGE_KEY}"))`
+			`JSON.parse(window.localStorage.getItem("${LOCALSTORAGE_KEY}"))`,
 		);
 		await expect(localStorageSnapshot).toHaveLength(3);
 
@@ -29,14 +29,14 @@ test.describe("backup", () => {
 
 		// clear storage
 		await page.evaluate(
-			`window.localStorage.removeItem("${LOCALSTORAGE_KEY}")`
+			`window.localStorage.removeItem("${LOCALSTORAGE_KEY}")`,
 		);
 
 		// import backup
 		await page.getByLabel("Import").setInputFiles(downloadPath!);
 
 		const newLocalStorageSnapshot = await page.evaluate(
-			`JSON.parse(window.localStorage.getItem("${LOCALSTORAGE_KEY}"))`
+			`JSON.parse(window.localStorage.getItem("${LOCALSTORAGE_KEY}"))`,
 		);
 		expect(newLocalStorageSnapshot).toStrictEqual(localStorageSnapshot);
 	});

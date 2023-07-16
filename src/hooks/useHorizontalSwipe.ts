@@ -8,7 +8,7 @@ interface UseSwipeOptions {
 
 export function useHorizontalSwipe(
 	ref: RefObject<HTMLElement | SVGSVGElement>,
-	options: UseSwipeOptions
+	options: UseSwipeOptions,
 ) {
 	const optionsRef = useRef(options);
 
@@ -31,7 +31,7 @@ export function useHorizontalSwipe(
 
 		function handleMove(event: TouchEvent) {
 			const touch = [...event.changedTouches].find(
-				t => t.identifier === touchId
+				t => t.identifier === touchId,
 			);
 			if (!touch) {
 				return;
@@ -62,7 +62,7 @@ export function useHorizontalSwipe(
 		return () => {
 			node?.removeEventListener(
 				"touchstart",
-				handleStart as EventListener
+				handleStart as EventListener,
 			);
 			node?.removeEventListener("touchmove", handleMove as EventListener);
 		};

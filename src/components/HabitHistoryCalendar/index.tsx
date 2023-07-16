@@ -30,7 +30,7 @@ export const HabitHistoryCalendar = observer(
 		const ref = useRef<SVGSVGElement>(null);
 
 		const [selectedDateKey, setSelectedDateKey] = useState<DateKey | null>(
-			null
+			null,
 		);
 
 		const isExtraSmallScreen = useMediaQuery("xs", true);
@@ -38,7 +38,7 @@ export const HabitHistoryCalendar = observer(
 
 		const { data, offset, shiftLeft, shiftRight } = useHabitHistory(
 			habit,
-			totalWeeks
+			totalWeeks,
 		);
 
 		useHorizontalSwipe(ref, {
@@ -104,7 +104,7 @@ export const HabitHistoryCalendar = observer(
 												"cursor-pointer",
 												value
 													? "text-sky-600 dark:text-blue-500"
-													: "text-gray-200 dark:text-neutral-700"
+													: "text-gray-200 dark:text-neutral-700",
 											)}
 											width={RECT_SIZE}
 											height={RECT_SIZE}
@@ -113,8 +113,8 @@ export const HabitHistoryCalendar = observer(
 											data-datekey={getDateKey(
 												indexesToDate(
 													weekIndex,
-													dayIndex
-												)
+													dayIndex,
+												),
 											)}
 										/>
 										<text
@@ -123,14 +123,14 @@ export const HabitHistoryCalendar = observer(
 												"pointer-events-none",
 												value
 													? "text-white dark:text-neutral-800"
-													: "text-gray-600 dark:text-neutral-400"
+													: "text-gray-600 dark:text-neutral-400",
 											)}
 											y={RECT_SIZE / 2 + 0.5}
 											x={RECT_SIZE / 2}
 										>
 											{indexesToDate(
 												weekIndex,
-												dayIndex
+												dayIndex,
 											).date()}
 										</text>
 									</g>
@@ -157,7 +157,7 @@ export const HabitHistoryCalendar = observer(
 				)}
 			</>
 		);
-	}
+	},
 );
 
 const MonthLabels = memo(function MonthLabels({
@@ -185,7 +185,7 @@ const MonthLabels = memo(function MonthLabels({
 					key={weekEnd.month()}
 				>
 					{formatMonthLabel(weekEnd.toDate(), labels.length === 0)}
-				</text>
+				</text>,
 			);
 		}
 

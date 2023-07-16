@@ -14,7 +14,7 @@ test.describe("habit form", () => {
 		await visitHabitPage(page, habit.name);
 		await expect(page.getByText(habit.name)).toBeVisible();
 		await expect(
-			page.getByText(`${habit.goal} ${habit.units}`)
+			page.getByText(`${habit.goal} ${habit.units}`),
 		).toBeVisible();
 	});
 
@@ -32,10 +32,10 @@ test.describe("habit form", () => {
 		await page.goto("/");
 
 		await expect(page.getByTestId("habit-name").nth(0)).toHaveText(
-			secondHabit.name
+			secondHabit.name,
 		);
 		await expect(page.getByTestId("habit-name").nth(1)).toHaveText(
-			firstHabit.name
+			firstHabit.name,
 		);
 	});
 });

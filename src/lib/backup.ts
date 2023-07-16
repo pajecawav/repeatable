@@ -11,7 +11,7 @@ export function exportData(data: DataBackup) {
 	const date = dayjs().format("YYYY-MM-DD_HH-mm-ss");
 	saveToFile(
 		JSON.stringify(data, undefined, 4),
-		`${PROJECT_NAME}-${date}.json`
+		`${PROJECT_NAME}-${date}.json`,
 	);
 }
 

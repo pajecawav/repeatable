@@ -23,7 +23,7 @@ i18n.use(initReactI18next).init({
 
 reaction(
 	() => settingsStore.lang,
-	lang => i18n.changeLanguage(lang)
+	lang => i18n.changeLanguage(lang),
 );
 
 export default i18n;

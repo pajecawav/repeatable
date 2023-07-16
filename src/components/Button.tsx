@@ -16,7 +16,7 @@ export function Button<As extends ElementType = "button">({
 		<Component
 			className={cn(
 				"shadow-sm min-w-[4rem] bg-white text-center px-3 py-1 rounded-md dark:bg-neutral-800",
-				className
+				className,
 			)}
 			{...props}
 		/>

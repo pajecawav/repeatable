@@ -12,7 +12,7 @@ export function useHabitHistory(habit: Habit, totalWeeks: number) {
 
 	const shiftRight = useCallback(
 		() => setOffset(offset => Math.min(0, offset + 1)),
-		[]
+		[],
 	);
 
 	const data = useMemo(() => {

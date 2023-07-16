@@ -23,7 +23,7 @@ function DateProgressLabel({ date, habit }: { date: DateKey; habit: Habit }) {
 					value === 0 && "text-gray-400 dark:text-neutral-500",
 					value !== 0 &&
 						value < habit.goal &&
-						"text-neutral-500 dark:text-neutral-300"
+						"text-neutral-500 dark:text-neutral-300",
 				)}
 				onClick={open}
 			>
@@ -89,7 +89,7 @@ export const HabitsListEntry = observer(
 						className={cn(
 							"absolute left-0 -translate-x-full w-6 h-6 opacity-0 hidden sm:block",
 							"text-gray-400 dark:text-neutral-500 cursor-grab outline-none transition-opacity duration-200 group-hover:duration-75",
-							!isOver && !isDragging && "group-hover:opacity-100"
+							!isOver && !isDragging && "group-hover:opacity-100",
 						)}
 					/>
 				)}
@@ -119,5 +119,5 @@ export const HabitsListEntry = observer(
 				</div>
 			</div>
 		);
-	}
+	},
 );
