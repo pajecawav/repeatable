@@ -1,4 +1,4 @@
-import { Modal } from "@/Modal";
+import { Modal } from "@/components/Modal";
 import { store } from "@/stores/habitsStore";
 import { DateKey } from "@/types";
 import { FormEvent } from "react";
