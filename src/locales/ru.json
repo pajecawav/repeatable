@@ -42,12 +42,15 @@
 		"label.weekday.tuesday": "Вторник",
 		"label.weekday.wednesday": "Среда",
 		"label.year": "Год",
+		"label.reload": "Обновить",
+		"label.close": "Закрыть",
 		"message.confirm-delete": "Вы действительно хотите удалить эту привычку?",
 		"message.data-exported": "Данные экспортированы.",
 		"message.data-imported": "Данные импортированы.",
 		"message.habit-created": "Привычка создана.",
 		"message.habit-deleted": "Привычка удалена.",
 		"message.habit-updated": "Привычка обновлена.",
-		"message.no-habits": "Список пуст."
+		"message.no-habits": "Список пуст.",
+		"message.worker-update": "Доступен новый контент, нажмите кнопку для обновления."
 	}
 }

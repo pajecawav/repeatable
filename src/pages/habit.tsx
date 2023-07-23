@@ -42,7 +42,9 @@ export function HabitPage({ params: { id: idProp } }: HaibtPageProps) {
 				<Button as={Link} href={`/${id}/edit`}>
 					{t("label.edit")}
 				</Button>
-				<Button onClick={handleDelete}>{t("label.delete")}</Button>
+				<Button variant="danger" onClick={handleDelete}>
+					{t("label.delete")}
+				</Button>
 			</div>
 
 			<div className="text-neutral-500 dark:text-neutral-400">

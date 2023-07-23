@@ -42,12 +42,15 @@
 		"label.weekday.tuesday": "Tuesday",
 		"label.weekday.wednesday": "Wednesday",
 		"label.year": "Year",
+		"label.reload": "Reload",
+		"label.close": "Close",
 		"message.confirm-delete": "Are you sure you want to delete this habit?",
 		"message.data-exported": "Exported data.",
 		"message.data-imported": "Imported data.",
 		"message.habit-created": "Habit added.",
 		"message.habit-deleted": "Deleted habit.",
 		"message.habit-updated": "Updated habit.",
-		"message.no-habits": "No habits in the list."
+		"message.no-habits": "No habits in the list.",
+		"message.worker-update": "New content available, click the reload button to update."
 	}
 }
